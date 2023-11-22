@@ -4,7 +4,7 @@ public class HighTemperatureStrategy implements AirTemperatureStrategy{
     @Override
     public double getChange() {
         double changeDirection = Math.random();
-        if (changeDirection < 0.8)
+        if (changeDirection < 0.2)
             return increaseTemp();
         else
             return decreaseTemp();

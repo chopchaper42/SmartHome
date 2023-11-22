@@ -2,6 +2,7 @@ package org.example.environment.airTemperature;
 
 public interface AirTemperatureStrategy {
     double getChange();
+
     /**
      * Randomly generates temperature decrease from -5 up to 0 degrees Celsius.
      * @return temperature decrease

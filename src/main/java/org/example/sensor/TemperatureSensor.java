@@ -1,10 +1,11 @@
 package org.example.sensor;
 
-public class TemperatureSensor {
+public class TemperatureSensor implements Sensor {
     private final double LOWER_LIMIT = 10;
     private final double HIGHER_LIMIT = 25;
     private double previousTemperature;
     public void reactOnChange(double temperature) {
+        System.out.println("Temperature: " + temperature);
         if (roseAboveHigherLimit(temperature))
             System.out.println("Enabling cooling on the thermostat");
         else if (droppedBelowHigherLimit(temperature))
@@ -13,6 +14,8 @@ public class TemperatureSensor {
             System.out.println("Enabling heating on the thermostat");
         else if (roseAboveLowerLimit(temperature))
             System.out.println("Disabling heating on the thermostat");
+
+        previousTemperature = temperature;
     }
 
     private boolean roseAboveHigherLimit(double temperature) {
@@ -25,6 +28,6 @@ public class TemperatureSensor {
         return temperature >= LOWER_LIMIT && previousTemperature < LOWER_LIMIT;
     }
     private boolean droppedBelowHigherLimit(double temperature) {
-        return temperature <= HIGHER_LIMIT && previousTemperature < HIGHER_LIMIT;
+        return temperature <= HIGHER_LIMIT && previousTemperature > HIGHER_LIMIT;
     }
 }

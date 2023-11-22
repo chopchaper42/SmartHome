@@ -1,4 +1,5 @@
 package org.example.sensor;
 
-public class Sensor {
+public interface Sensor {
+    void reactOnChange(double v);
 }

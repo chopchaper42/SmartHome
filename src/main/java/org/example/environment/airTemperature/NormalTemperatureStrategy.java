@@ -1,6 +1,7 @@
 package org.example.environment.airTemperature;
 
-public class NormalTemperatureStrategy implements AirTemperatureStrategy{
+public class NormalTemperatureStrategy implements AirTemperatureStrategy {
+
     @Override
     public double getChange() {
         double changeDirection = Math.random();
