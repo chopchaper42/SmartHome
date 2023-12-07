@@ -4,9 +4,7 @@ import org.example.device.Device;
 import org.example.device.DeviceTypes;
 import org.example.house.Room;
 
-public abstract class DeviceFactory {
-    private String concreteDevice;
-    public abstract Device createDevice(Room room, DeviceTypes type, String concreteDevice);
-
-
+public abstract class DeviceFactory<T> {
+    //private concreteDevice;
+    public abstract Device createDevice(Room room, DeviceTypes type, T concreteDevice);
 }

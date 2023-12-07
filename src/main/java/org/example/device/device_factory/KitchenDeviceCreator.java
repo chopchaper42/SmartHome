@@ -13,18 +13,17 @@ import org.example.house.Room;
 import static org.example.device.DeviceTypes.ENTERTAINMENT_DEVICE;
 import static org.example.device.DeviceTypes.KITCHEN_DEVICE;
 
-public class KitchenDeviceCreator extends DeviceFactory{
+public class KitchenDeviceCreator extends DeviceFactory<KitchenDeviceTypes>{
     //redo later
     @Override
     public Device createDevice(Room room, DeviceTypes type, KitchenDeviceTypes concreteDevice){
-        if (type == KITCHEN_DEVICE) {
             Device device = switch (concreteDevice) {
-                case TEAPOD: new Teapod();
-                case FRIDGE: new Fridge();
-                case ELECTRIC_STOVE: new ElectricStove();
-                case PET_FEEDER: new PetFeeder();
-            }
-        }
+                case TEAPOD -> new Teapod(room);
+                case FRIDGE -> new Fridge(room);
+                case ELECTRIC_STOVE -> new ElectricStove(room);
+                case PET_FEEDER -> new PetFeeder(room);
+                default -> throw new IllegalArgumentException("Unknown Construction Device Type");
+            };
         return device;
     }
 }

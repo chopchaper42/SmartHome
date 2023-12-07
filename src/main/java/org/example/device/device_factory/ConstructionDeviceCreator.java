@@ -10,17 +10,17 @@ import org.example.house.Room;
 import static org.example.device.ConstructionDeviceTypes.AUTOMATIC_DOOR;
 import static org.example.device.DeviceTypes.CONSTRUCTION_DEVICE;
 
-public class ConstructionDeviceCreator extends DeviceFactory{
+public class ConstructionDeviceCreator extends DeviceFactory<ConstructionDeviceTypes>{
     //redo later
 
     @Override
     public Device createDevice(Room room, DeviceTypes type, ConstructionDeviceTypes concreteDevice){
-        if (type == CONSTRUCTION_DEVICE) {
             Device device = switch (concreteDevice) {
-                case AUTOMATIC_DOOR: new AutomaticDoor();
-                case AUTOMATIC_WINDOW: new AutomaticWindow();
-            }
-        }
+                case AUTOMATIC_DOOR -> new AutomaticDoor(room);
+                case AUTOMATIC_WINDOW -> new AutomaticWindow(room);
+                default -> throw new IllegalArgumentException("Unknown Construction Device Type");
+
+        };
         return device;
     }
 }

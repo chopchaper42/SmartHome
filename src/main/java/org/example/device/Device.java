@@ -1,24 +1,39 @@
 package org.example.device;
 
-import org.example.device.device_factory.ConstructionDeviceCreator;
 import org.example.house.Room;
 
-public class Device {
+public abstract class Device {
 
-    private final DeviceTypes type;
+    //private final DeviceTypes type;
     private final Room currentRoom;
-    private  String concreteDevice;
+
+    //electricity wasting
+    private final int usualElectricityWasting;
+    private final int brokenElectricityWasting;
 
 
-    //private currentState = new IdleState(this);
+    private final int idleElectricityWasting;
 
     private int electricity = 0;
 
-    public Device(Room currentRoom, DeviceTypes type) {
-        this.type = type;
-        this.currentRoom = currentRoom;
 
+    protected Device(Room currentRoom, int usualElectricityWasting, int brokenElectricityWasting, int idleElectricityWasting) {
+        this.currentRoom = currentRoom;
+        this.usualElectricityWasting = usualElectricityWasting;
+        this.brokenElectricityWasting = brokenElectricityWasting;
+        this.idleElectricityWasting = idleElectricityWasting;
     }
 
+    //GETTERS & SETTERS
+    public int getUsualElectricityWasting() {
+        return usualElectricityWasting;
+    }
 
+    public int getBrokenElectricityWasting() {
+        return brokenElectricityWasting;
+    }
+
+    public int getIdleElectricityWasting() {
+        return idleElectricityWasting;
+    }
 }

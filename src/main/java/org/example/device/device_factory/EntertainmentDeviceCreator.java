@@ -12,19 +12,18 @@ import static org.example.device.DeviceTypes.CONSTRUCTION_DEVICE;
 import static org.example.device.DeviceTypes.ENTERTAINMENT_DEVICE;
 import org.example.device.EntertainmentDeviceTypes;
 
-public class EntertainmentDeviceCreator extends DeviceFactory{
+public class EntertainmentDeviceCreator extends DeviceFactory<EntertainmentDeviceTypes>{
     //redo later
     @Override
     public Device createDevice(Room room, DeviceTypes type, EntertainmentDeviceTypes concreteDevice){
-        if (type == ENTERTAINMENT_DEVICE) {
             Device device = switch (concreteDevice) {
-                case TV: new TV();
-                case MOBILE: new Mobile();
-                case SMART_WATCH: new SmartWatch();
-                case CD_PLAYER: new CdPlayer();
-                case COMPUTER: new Computer();
-            }
-        }
+                case TV -> new TV(room);
+                case MOBILE -> new Mobile(room);
+                case SMART_WATCH -> new SmartWatch(room);
+                case CD_PLAYER -> new CdPlayer(room);
+                case COMPUTER -> new Computer(room);
+                default -> throw new IllegalArgumentException("Unknown Construction Device Type");
+            };
         return device;
     }
 }
