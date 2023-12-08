@@ -21,7 +21,7 @@ public class Cat extends Creature {
     @Override
     public void useDevice(Device device){
         //do later
-        System.out.println("Meow is damaging device");
+        System.out.println("Meow is damaging device ≧◠ᴥ◠≦");
         currentEnergy = super.getMaxEnergy() - 1;
     }
 
@@ -32,7 +32,7 @@ public class Cat extends Creature {
 
     @Override
     public void sleep() {
-        System.out.println(super.getName() + "is sleeping");
+        System.out.println(super.getName() + "is sleeping ≧◠ᴥ◠≦");
         currentEnergy = super.getMaxEnergy() + 3;
     }
 
@@ -40,7 +40,7 @@ public class Cat extends Creature {
     public void eat() {
         //do later
         //useDevice(petDevice)
-        System.out.println(super.getName() + "is eating");
+        System.out.println(super.getName() + "is eating ≧◠ᴥ◠≦");
         currentEnergy = super.getMaxEnergy() + 1;
     }
 }

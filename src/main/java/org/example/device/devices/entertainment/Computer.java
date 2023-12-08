@@ -5,11 +5,11 @@ import org.example.house.Room;
 
 public class Computer extends Device {
     //electricity wasting
-    private static final int usualElectricityWasting = 8;
-    private static final int brokenElectricityWasting = 15;
-    private static final int idleElectricityWasting = 1;
+    private static final int onElectricityWasting = 8;
+    private static final int offElectricityWasting = 15;
+    private static final int brokenElectricityWasting = 1;
     //****************************
     public Computer(Room room) {
-        super(room, usualElectricityWasting, brokenElectricityWasting, idleElectricityWasting);
+        super(room, onElectricityWasting, offElectricityWasting, brokenElectricityWasting);
     }
 }

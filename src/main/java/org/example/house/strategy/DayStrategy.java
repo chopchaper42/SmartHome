@@ -1,4 +1,13 @@
 package org.example.house.strategy;
 
-public class DayStrategy {
+import org.example.creature.Creature;
+
+import java.util.List;
+
+public class DayStrategy implements Strategy{
+
+    @Override
+    public void everythingIsHappeningAsISaid(List<Creature> creatures) {
+
+    }
 }

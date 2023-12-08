@@ -6,4 +6,11 @@ public class BrokenState extends DeviceState{
     public BrokenState(Device device) {
         super(device);
     }
+
+    @Override
+    public String onOffOn() {
+        //???
+    }
+
+
 }

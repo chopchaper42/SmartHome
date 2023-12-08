@@ -6,11 +6,11 @@ import org.example.house.Room;
 public class CdPlayer extends Device {
 
     //electricity wasting
-    private static final int usualElectricityWasting = 15;
-    private static final int brokenElectricityWasting = 20;
-    private static final int idleElectricityWasting = 1;
+    private static final int onElectricityWasting = 15;
+    private static final int offElectricityWasting = 20;
+    private static final int brokenElectricityWasting = 1;
     //****************************
     public CdPlayer(Room room) {
-        super(room, usualElectricityWasting, brokenElectricityWasting, idleElectricityWasting);
+        super(room, onElectricityWasting, offElectricityWasting, brokenElectricityWasting);
     }
 }

@@ -6,11 +6,11 @@ import org.example.house.Room;
 public class SmartWatch extends Device {
     //electricity wasting
     //CHANGE LATER TO THE BATTERY, NOT ELECTRICITY
-    private static final int usualElectricityWasting = 7;
-    private static final int brokenElectricityWasting = 20;
-    private static final int idleElectricityWasting = 5;
+    private static final int onElectricityWasting = 7;
+    private static final int offElectricityWasting = 20;
+    private static final int brokenElectricityWasting = 5;
     //****************************
     public SmartWatch(Room room) {
-        super(room, usualElectricityWasting, brokenElectricityWasting, idleElectricityWasting);
+        super(room, onElectricityWasting, offElectricityWasting, brokenElectricityWasting);
     }
 }
