@@ -1,9 +1,10 @@
 package org.example.environment.airTemperature;
 
 import lombok.Getter;
+import org.example.environment.EnvironmentParameter;
 
 
-public class AirTemperature {
+public class AirTemperature extends EnvironmentParameter {
 
     @Getter
     private final double HIGH_TEMP_LIMIT = 25;
@@ -15,6 +16,7 @@ public class AirTemperature {
      */
     @Getter
     private double temperature;
+    private static int tickCounter = 0;
     private AirTemperatureStrategy strategy;
     public AirTemperature(double temperature, AirTemperatureStrategy strategy) {
         if (temperature < -90 || temperature > 60)
@@ -38,9 +40,13 @@ public class AirTemperature {
     }
 
     public void update() {
-        double prevTemp = temperature;
-        temperature += strategy.getChange();
-        changeStrategy(prevTemp);
+        if (tickCounter > 15) {
+            double prevTemp = temperature;
+            temperature += strategy.getChange();
+            changeStrategy(prevTemp);
+            tickCounter = 0;
+        }
+        tickCounter++;
     }
 
     private void changeStrategy(double previousTemperature) {
@@ -57,6 +63,5 @@ public class AirTemperature {
             strategy = new NormalTemperatureStrategy();
             System.out.println("Strategy changed to: NORMAL");
         }
-//        System.out.println("Strategy changed to: " + strategy.getClass().getSimpleName());
     }
 }

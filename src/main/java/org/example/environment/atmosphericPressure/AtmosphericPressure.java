@@ -1,4 +1,4 @@
-package org.example.environment;
+package org.example.environment.atmosphericPressure;
 
 public class AtmosphericPressure {
     private double pressure;

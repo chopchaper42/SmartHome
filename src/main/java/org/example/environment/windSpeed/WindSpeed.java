@@ -1,4 +1,4 @@
-package org.example.environment;
+package org.example.environment.windSpeed;
 
 public class WindSpeed {
     /**
