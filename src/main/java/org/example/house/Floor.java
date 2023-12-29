@@ -2,10 +2,11 @@ package org.example.house;
 
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
 public class Floor extends HouseNode {
-    int number;
-    List<Room> rooms;
+    private final int number; //?? co to je
+    private final List<Room> rooms = new ArrayList<>();
 }
