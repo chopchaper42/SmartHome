@@ -1,8 +1,10 @@
 package org.example.environment.airQuality;
 
+import lombok.Getter;
 import org.example.environment.Environment;
 import org.example.environment.EnvironmentParameter;
 
+@Getter
 public class AirQuality extends EnvironmentParameter {
     double quality;
 
@@ -17,7 +19,7 @@ public class AirQuality extends EnvironmentParameter {
     public void update() {
         if (tickCounter > 100) {
             quality = Math.random() * 100;
-            tickCounter = 0;
+            tickCounter = (int) (Math.random() * 100);
         }
         tickCounter++;
     }

@@ -5,8 +5,7 @@ import org.example.environment.airQuality.AirQuality;
 import org.example.environment.airTemperature.AirTemperature;
 import org.example.environment.atmosphericPressure.AtmosphericPressure;
 import org.example.environment.windSpeed.WindSpeed;
-import org.example.sensor.Sensor;
-import org.example.sensor.TemperatureSensor;
+import org.example.sensor.*;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -25,9 +24,9 @@ public class Environment {
 
     public void update() {
         airTemperature.update();
-//        windSpeed.update();
+        windSpeed.update();
         airQuality.update();
-//        atmosphericPressure.update();
+        atmosphericPressure.update();
 
         notifySubscribers();
     }
@@ -36,6 +35,12 @@ public class Environment {
         for (Sensor s : subscribers) {
             if (s instanceof TemperatureSensor)
                 s.reactOnChange(airTemperature.getTemperature());
+            if (s instanceof WindSensor)
+                s.reactOnChange(windSpeed.getSpeed());
+            if (s instanceof AirQualitySensor)
+                s.reactOnChange(airQuality.getQuality());
+            if (s instanceof AtmosphericPressureSensor)
+                s.reactOnChange(atmosphericPressure.getPressure());
         }
     }
 

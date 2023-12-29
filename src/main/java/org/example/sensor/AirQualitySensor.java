@@ -6,7 +6,7 @@ public class AirQualitySensor extends Sensor {
 
     @Override
     public void reactOnChange(double v) {
-
+        System.out.println("AQ: " + v);
     }
 
     protected boolean roseAboveLimit(double v) {
