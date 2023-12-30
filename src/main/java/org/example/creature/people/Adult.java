@@ -2,13 +2,16 @@ package org.example.creature.people;
 
 import org.example.creature.Creature;
 import org.example.device.Device;
-import org.example.house.Room;
+import org.example.house.room.Room;
+import org.example.house.room.RoomNotFoundException;
+import org.example.house.room.RoomType;
+
+import java.util.concurrent.ExecutionException;
 
 public class Adult extends Creature {
 
-    double currentEnergy;
-    public Adult(String name, String type, double maxEnergy, Room currentRoom) {
-        super(name, type, maxEnergy, currentRoom);
+    public Adult(String name, /*String type, */int maxEnergy, Room currentRoom) {
+        super(name, maxEnergy, currentRoom);
     }
 
     @Override
@@ -22,22 +25,17 @@ public class Adult extends Creature {
     }
 
     @Override
-    public Room getRoom() {
-        //do later
-        return null;
-    }
-
-    @Override
     public void sleep() {
+        int energyGain = Math.min(getCurrentEnergy() + 50, getMaxEnergy());
         System.out.println(super.getName() + "is sleeping");
-        currentEnergy = super.getMaxEnergy() + 2;
+        setCurrentEnergy(energyGain);
     }
 
     @Override
     public void eat() {
-        //do later
-        //useDevice(fridge)
+        navigateTo(RoomType.KITCHEN);
+//        useDevice(getCurrentRoom().getDevices().);
         System.out.println(super.getName() + "is eating food ");
-        currentEnergy = super.getMaxEnergy() + 2;
+//        currentEnergy = super.getMaxEnergy() + 2;
     }
 }

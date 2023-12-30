@@ -2,26 +2,15 @@ package org.example.creature.people;
 
 import org.example.creature.Creature;
 import org.example.device.Device;
-import org.example.house.Room;
+import org.example.house.room.Room;
 
 public class Child extends Creature {
 
     double currentEnergy;
     int age;
-    public Child(String name, String type, double maxEnergy, Room currentRoom) {
-        super(name, type, maxEnergy, currentRoom);
+    public Child(String name, String type, int maxEnergy, Room currentRoom) {
+        super(name, maxEnergy, 100, currentRoom);
     }
-
-    //GETTERS AND SETTERS
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    //*****************
 
     @Override
     public void makeSound(){
@@ -32,12 +21,6 @@ public class Child extends Creature {
     public void useDevice(Device device) {
         //do later
         System.out.println("do later");
-    }
-
-    @Override
-    public Room getRoom() {
-        //do later
-        return null;
     }
 
     @Override

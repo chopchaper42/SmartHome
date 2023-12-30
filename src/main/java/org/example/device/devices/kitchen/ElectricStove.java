@@ -1,7 +1,7 @@
 package org.example.device.devices.kitchen;
 
 import org.example.device.Device;
-import org.example.house.Room;
+import org.example.house.room.Room;
 
 public class ElectricStove extends Device {
 

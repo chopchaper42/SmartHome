@@ -1,6 +1,7 @@
 package org.example.house;
 
 import lombok.AllArgsConstructor;
+import org.example.house.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -14,6 +14,7 @@ import java.util.TimerTask;
 
 public class SmartHomeApplication {
     public static void main(String[] args) {
+
         TemperatureSensor tempSensor = new TemperatureSensor();
         WindSensor windSensor = new WindSensor();
         AirQualitySensor airQualitySensor = new AirQualitySensor();

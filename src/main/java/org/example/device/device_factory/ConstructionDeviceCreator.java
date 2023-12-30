@@ -5,10 +5,7 @@ import org.example.device.Device;
 import org.example.device.DeviceTypes;
 import org.example.device.devices.construction.AutomaticDoor;
 import org.example.device.devices.construction.AutomaticWindow;
-import org.example.house.Room;
-
-import static org.example.device.ConstructionDeviceTypes.AUTOMATIC_DOOR;
-import static org.example.device.DeviceTypes.CONSTRUCTION_DEVICE;
+import org.example.house.room.Room;
 
 public class ConstructionDeviceCreator extends DeviceFactory<ConstructionDeviceTypes>{
     //redo later

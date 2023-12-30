@@ -1,9 +1,7 @@
 package org.example.device;
 
 import org.example.device.state_pattern.DeviceState;
-import org.example.device.state_pattern.OffState;
-import org.example.device.state_pattern.OnState;
-import org.example.house.Room;
+import org.example.house.room.Room;
 
 public abstract class Device {
 

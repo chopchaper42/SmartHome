@@ -3,15 +3,11 @@ package org.example.device.device_factory;
 import org.example.device.Device;
 import org.example.device.DeviceTypes;
 import org.example.device.KitchenDeviceTypes;
-import org.example.device.devices.entertainment.*;
 import org.example.device.devices.kitchen.ElectricStove;
 import org.example.device.devices.kitchen.Fridge;
 import org.example.device.devices.kitchen.PetFeeder;
 import org.example.device.devices.kitchen.Teapod;
-import org.example.house.Room;
-
-import static org.example.device.DeviceTypes.ENTERTAINMENT_DEVICE;
-import static org.example.device.DeviceTypes.KITCHEN_DEVICE;
+import org.example.house.room.Room;
 
 public class KitchenDeviceCreator extends DeviceFactory<KitchenDeviceTypes>{
     //redo later

@@ -2,7 +2,7 @@ package org.example.device.device_factory;
 
 import org.example.device.Device;
 import org.example.device.DeviceTypes;
-import org.example.house.Room;
+import org.example.house.room.Room;
 
 public abstract class DeviceFactory<T> {
     //private concreteDevice;

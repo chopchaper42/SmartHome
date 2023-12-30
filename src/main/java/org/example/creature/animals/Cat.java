@@ -2,14 +2,14 @@ package org.example.creature.animals;
 
 import org.example.creature.Creature;
 import org.example.device.Device;
-import org.example.house.Room;
+import org.example.house.room.Room;
 
 public class Cat extends Creature {
 
 
     double currentEnergy;
-    public Cat(String name, String type, double maxEnergy, Room currentRoom) {
-        super(name, type, maxEnergy, currentRoom);
+    public Cat(String name, String type, int maxEnergy, Room currentRoom) {
+        super(name, maxEnergy, 100, currentRoom);
     }
 
 
@@ -25,10 +25,6 @@ public class Cat extends Creature {
         currentEnergy = super.getMaxEnergy() - 1;
     }
 
-    @Override
-    public Room getRoom() {
-        return null;
-    }
 
     @Override
     public void sleep() {

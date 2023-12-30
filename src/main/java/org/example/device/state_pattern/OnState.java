@@ -13,5 +13,10 @@ public class OnState extends DeviceState {
         return device.turnOff();
     }
 
+    @Override
+    public void usingElectricity() {
+
+    }
+
 
 }

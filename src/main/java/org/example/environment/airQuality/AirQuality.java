@@ -1,7 +1,6 @@
 package org.example.environment.airQuality;
 
 import lombok.Getter;
-import org.example.environment.Environment;
 import org.example.environment.EnvironmentParameter;
 
 @Getter

@@ -1,7 +1,7 @@
 package org.example.device.devices.construction;
 
 import org.example.device.Device;
-import org.example.house.Room;
+import org.example.house.room.Room;
 
 public class AutomaticWindow extends Device {
 
