@@ -11,10 +11,7 @@ import java.util.List;
 
 @Builder
 public class HouseControlSystem {
-    private TemperatureSensor temperatureSensor;
-    private WindSensor windSensor;
-    private AirQualitySensor airQualitySensor;
-    private AtmosphericPressureSensor atmosphericPressureSensor;
+    private static HouseControlSystem system;
 
     private List<Device> devices;
 
@@ -27,5 +24,14 @@ public class HouseControlSystem {
 
     private void alert() {
 //        alertSystem
+    }
+
+    private HouseControlSystem() {}
+
+    public static HouseControlSystem getInstance() {
+        if (system == null)
+            system = new HouseControlSystem();
+
+        return system;
     }
 }

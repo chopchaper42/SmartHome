@@ -1,10 +1,26 @@
 package org.example.device.device_factory;
 
 import org.example.device.Device;
-import org.example.device.DeviceTypes;
-import org.example.house.room.Room;
 
-public abstract class DeviceFactory<T> {
-    //private concreteDevice;
-    public abstract Device createDevice(Room room, DeviceTypes type, T concreteDevice);
+public class DeviceFactory {
+
+    private static DeviceFactory instance;
+
+    private DeviceFactory() {}
+
+    public static DeviceFactory getInstance() {
+        if (instance == null)
+            instance = new DeviceFactory();
+
+        return instance;
+    }
+
+    public static <T extends Device> T createDevice(Class<T> clazz) {
+        try {
+            // TODO: there is no default constructor in Device;
+            T device = clazz.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

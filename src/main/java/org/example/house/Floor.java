@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-public class Floor extends HouseNode {
-    private final int number; //?? co to je
+public class Floor {
+    private final int number;
     private final List<Room> rooms = new ArrayList<>();
 }
