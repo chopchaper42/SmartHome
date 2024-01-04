@@ -16,11 +16,13 @@ public class DeviceFactory {
     }
 
     public static <T extends Device> T createDevice(Class<T> clazz) {
+        T device;
         try {
             // TODO: there is no default constructor in Device;
-            T device = clazz.getDeclaredConstructor().newInstance();
+            device = clazz.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return device;
     }
 }

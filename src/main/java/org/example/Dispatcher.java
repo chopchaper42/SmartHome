@@ -1,9 +1,9 @@
 package org.example;
 
 import org.example.house.room.Room;
-import org.example.location.Location;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -16,7 +16,7 @@ public class Dispatcher {
         roomMap = new HashMap<>();
     }
 
-    public static Dispatcher getInstance() {
+    public static Dispatcher instance() {
         if (dispatcher == null) {
             dispatcher = new Dispatcher();
         }
@@ -27,9 +27,13 @@ public class Dispatcher {
         roomMap.put(room.getId(), room);
     }
 
-    public Room getRandomRoom() {
+    public Room randomRoom() {
         Object[] rooms = roomMap.values().toArray();
         return (Room) rooms[new Random().nextInt(rooms.length)];
+    }
+
+    public List<Room> rooms() {
+        return roomMap.values().stream().toList();
     }
 
 }

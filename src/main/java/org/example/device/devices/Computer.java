@@ -9,4 +9,14 @@ public class Computer extends Device {
     public void use() {
         consumedElectricity += CONSUMPTION;
     }
+
+    @Override
+    public void off() {
+
+    }
+
+    @Override
+    public void on() {
+
+    }
 }
