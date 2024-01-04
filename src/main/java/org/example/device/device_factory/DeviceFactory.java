@@ -1,5 +1,6 @@
 package org.example.device.device_factory;
 
+import org.example.IDGenerator;
 import org.example.device.Device;
 
 public class DeviceFactory {
@@ -15,11 +16,11 @@ public class DeviceFactory {
         return instance;
     }
 
-    public static <T extends Device> T createDevice(Class<T> clazz) {
+    public <T extends Device> T createDevice(Class<T> clazz) {
         T device;
         try {
-            // TODO: there is no default constructor in Device;
             device = clazz.getDeclaredConstructor().newInstance();
+            device.setId(IDGenerator.getInstance().generateID(clazz));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

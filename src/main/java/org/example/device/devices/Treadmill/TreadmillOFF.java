@@ -1,10 +1,10 @@
-package org.example.device.devices.Lamp;
+package org.example.device.devices.Treadmill;
 
 import org.example.device.Device;
 import org.example.device.state.DeviceState;
 
-public class LampOFF extends DeviceState {
-    public LampOFF(Device device) {
+public class TreadmillOFF extends DeviceState {
+    public TreadmillOFF(Device device) {
         super(device);
     }
 

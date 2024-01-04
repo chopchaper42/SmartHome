@@ -7,15 +7,6 @@ public class LampON extends DeviceState {
     private final double CONSUMPTION = 5d;
     public LampON(Device device) {
         super(device);
-        state = State.ON;
-    }
-
-    @Override
-    public void turnOn() {}
-
-    @Override
-    public void turnOff() {
-        device.off();
     }
 
     @Override

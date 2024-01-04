@@ -1,29 +1,25 @@
 package org.example.device;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.example.device.state.DeviceState;
+import org.example.device.state.StateON;
 
 import java.util.UUID;
 
 public abstract class Device {
     protected DeviceState state;
-    @Getter
     protected double consumedElectricity;
-    @Getter
+    private double electricityConsumption;
+    @Setter
     private String id;
 
-    public Device() {
+    protected Device(double consumption) {
         this.id = UUID.randomUUID().toString();
-    }
-
-    private void setState(DeviceState state) {
-        this.state = state;
+        electricityConsumption = consumption;
     }
 
     public void consumeElectricity(double d) { consumedElectricity += d; }
-
-    public boolean isOn() {return state.isOn(); }
-    public boolean isOff() {return state.isOff(); }
 
     public void use() {
         state.use();
@@ -34,7 +30,23 @@ public abstract class Device {
 
     @Override
     public String toString() {
-        String[] tokens = super.toString().split("\\.");
-        return tokens[tokens.length - 1];
+        return id;
+        /*String[] tokens = super.toString().split("\\.");
+        return tokens[tokens.length - 1];*/
     }
+
+    public boolean isON() { return state instanceof StateON; }
+
+    public double consumedElectricity() {
+        return consumedElectricity;
+    }
+
+    public double electricityConsumption() {
+        return electricityConsumption;
+    }
+
+    public String id() {
+        return id;
+    }
+
 }

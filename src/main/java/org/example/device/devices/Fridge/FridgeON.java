@@ -1,12 +1,13 @@
-package org.example.device.devices.CoffeMachine;
+package org.example.device.devices.Fridge;
 
 import org.example.device.Device;
 import org.example.device.state.DeviceState;
 
-public class CoffeeMachineON extends DeviceState {
-    private final double CONSUMPTION = 5d;
+public class FridgeON extends DeviceState {
 
-    public CoffeeMachineON(Device device) {
+    private final double CONSUMPTION = 10d;
+
+    public FridgeON(Device device) {
         super(device);
     }
 

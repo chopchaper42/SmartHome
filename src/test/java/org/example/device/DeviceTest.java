@@ -9,35 +9,15 @@ class DeviceTest {
     Device device = new Lamp();
     @Test
     void consumePower() {
-        Assertions.assertEquals(0, device.getConsumedElectricity());
-        Assertions.assertTrue(device.isOff());
+        Assertions.assertEquals(0, device.consumedElectricity());
+        Assertions.assertFalse(device.isON());
 
         device.on();
 
-        Assertions.assertTrue(device.isOn());
+        Assertions.assertTrue(device.isON());
 
         device.use();
 
-        Assertions.assertEquals(5, device.getConsumedElectricity());
-    }
-
-    @Test
-    void isOn() {
-    }
-
-    @Test
-    void isOff() {
-    }
-
-    @Test
-    void use() {
-    }
-
-    @Test
-    void off() {
-    }
-
-    @Test
-    void on() {
+        Assertions.assertEquals(5, device.consumedElectricity());
     }
 }

@@ -9,16 +9,7 @@ public class BicycleON extends DeviceState {
 
     public BicycleON(Device device) {
         super(device);
-        state = State.ON;
     }
-    @Override
-    public void turnOn() {}
-
-    @Override
-    public void turnOff() {
-        device.off();
-    }
-
     @Override
     public void use() {
         device.consumeElectricity(CONSUMPTION);

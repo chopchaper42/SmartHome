@@ -24,18 +24,18 @@ public class Creature {
 
         do {
             newRoom = Dispatcher.instance().randomRoom();
-        } while (newRoom == currentRoom);
+        } while (newRoom == currentRoom); // TODO: remove this
 
         currentRoom.removeCreature(this);
         System.out.println(name + " left " + currentRoom.getId());
         for (Lamp lamp : currentRoom.devicesByType(Lamp.class)) {
-            System.out.println(lamp.toString() + " is " + (lamp.isOn() ? "ON" : "OFF"));
+            System.out.println(lamp + " is " + (lamp.isOn() ? "ON" : "OFF"));
         }
         currentRoom = newRoom;
         currentRoom.addCreature(this);
         System.out.println(name + " entered " + currentRoom.getId());
         for (Lamp lamp : currentRoom.devicesByType(Lamp.class)) {
-            System.out.println(lamp.toString() + " is " + (lamp.isOn() ? "ON" : "OFF"));
+            System.out.println(lamp + " is " + (lamp.isOn() ? "ON" : "OFF"));
         }
     }
 

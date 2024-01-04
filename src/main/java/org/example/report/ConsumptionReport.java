@@ -8,10 +8,11 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public class ConsumptionReport extends Report {
-    public ConsumptionReport(File file) throws FileNotFoundException {
-        super(file);
+    public ConsumptionReport() throws FileNotFoundException {
+        super(new File("./src/main/reports/consumptionReport.txt"));
     }
 
+    @Override
     public void generateReport() {
         Dispatcher dispatcher = Dispatcher.instance();
         List<Room> rooms = dispatcher.rooms();

@@ -1,16 +1,12 @@
 package org.example.device.devices.Bicycle;
 
 import org.example.device.Device;
+import org.example.device.state.StateOFF;
 
 public class Bicycle extends Device {
     public Bicycle() {
-        super();
+        super(10d);
         state = new BicycleOFF(this);
-    }
-
-    @Override
-    public void use() {
-        state.use();
     }
 
     @Override

@@ -4,7 +4,7 @@ import org.example.device.Device;
 
 public class CoffeeMachine extends Device {
     public CoffeeMachine() {
-        super();
+        super(5d);
         state = new CoffeeMachineOFF(this);
     }
 

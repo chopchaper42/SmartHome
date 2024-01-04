@@ -64,7 +64,7 @@ public class Room {
         sb.append(id).append(":\n");
         for (Device dev : devices) {
             sb.append("\t").append(dev).append('\n');
-            sb.append("\t\tElectricity consumed: ").append(dev.getConsumedElectricity()).append('\n');
+            sb.append("\t\tElectricity consumed: ").append(dev.consumedElectricity()).append('\n');
         }
         return sb.toString();
     }

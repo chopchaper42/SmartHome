@@ -10,4 +10,6 @@ public abstract class Report {
     public Report(File file) throws FileNotFoundException {
         writer = new PrintWriter(file);
     }
+
+    public abstract void generateReport();
 }

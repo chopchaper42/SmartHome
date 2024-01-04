@@ -1,11 +1,10 @@
 package org.example;
 
+import org.example.house.Floor;
+import org.example.house.House;
 import org.example.house.room.Room;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Dispatcher {
 
@@ -23,8 +22,10 @@ public class Dispatcher {
         return dispatcher;
     }
 
-    public void addLocation(Room room) {
-        roomMap.put(room.getId(), room);
+    public void addLocations(House house) {
+        List<Room> rooms = house.getFloors().stream().map(Floor::getRooms).flatMap(Collection::stream).toList();
+        for (Room room : rooms)
+            roomMap.put(room.getId(), room);
     }
 
     public Room randomRoom() {
