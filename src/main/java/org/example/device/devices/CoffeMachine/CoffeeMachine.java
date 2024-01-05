@@ -5,16 +5,9 @@ import org.example.device.Device;
 public class CoffeeMachine extends Device {
     public CoffeeMachine() {
         super(5d);
-        state = new CoffeeMachineOFF(this);
     }
-
     @Override
-    public void off() {
-        state = new CoffeeMachineOFF(this);
-    }
-
-    @Override
-    public void on() {
-        state = new CoffeeMachineON(this);
+    public String getDocumentation() {
+        return "Coffee Machine documentation";
     }
 }

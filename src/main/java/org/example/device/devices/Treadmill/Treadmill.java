@@ -1,23 +1,16 @@
 package org.example.device.devices.Treadmill;
 
 import org.example.device.Device;
-import org.example.device.devices.Lamp.LampOFF;
-import org.example.device.devices.Lamp.LampON;
+import org.example.device.state.StateOFF;
 
 public class Treadmill extends Device {
     public Treadmill() {
         super(10d);
-        state = new TreadmillOFF(this);
-    }
-
-    public boolean isOn() { return state instanceof TreadmillON; }
-    @Override
-    public void off() {
-        state = new TreadmillOFF(this);
+        state = new StateOFF(this);
     }
 
     @Override
-    public void on() {
-        state = new TreadmillON(this);
+    public String getDocumentation() {
+        return "Treadmill documentation";
     }
 }

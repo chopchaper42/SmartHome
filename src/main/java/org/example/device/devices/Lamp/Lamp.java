@@ -1,21 +1,18 @@
 package org.example.device.devices.Lamp;
 
 import org.example.device.Device;
+import org.example.device.state.StateOFF;
+import org.example.device.state.StateON;
 
 public class Lamp extends Device {
+
     public Lamp() {
         super(3d);
-        state = new LampOFF(this);
-    }
-
-    public boolean isOn() { return state instanceof LampON; }
-    @Override
-    public void off() {
-        state = new LampOFF(this);
+        state = new StateOFF(this);
     }
 
     @Override
-    public void on() {
-        state = new LampON(this);
+    public String getDocumentation() {
+        return "Lamp documentation";
     }
 }

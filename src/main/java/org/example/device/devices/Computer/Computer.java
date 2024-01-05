@@ -6,17 +6,10 @@ import org.example.device.state.DeviceState;
 public class Computer extends Device {
 
     public Computer() {
-        super(10d);
-        state = new ComputerOFF(this);
+        super(15d);
     }
-
     @Override
-    public void off() {
-        state = new ComputerOFF(this);
-    }
-
-    @Override
-    public void on() {
-        state = new ComputerON(this);
+    public String getDocumentation() {
+        return "Computer documentation";
     }
 }
