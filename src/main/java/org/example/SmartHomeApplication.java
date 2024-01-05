@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.creature.Adult;
 import org.example.creature.Creature;
 import org.example.device.Device;
 import org.example.device.device_factory.DeviceFactory;
@@ -14,13 +15,9 @@ import org.example.logger.Logger;
 import org.example.report.ConsumptionReport;
 import org.example.report.HouseConfigurationReport;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class SmartHomeApplication {
     public static void main(String[] args) {
@@ -63,25 +60,28 @@ public class SmartHomeApplication {
 
         house.addAllFloors(List.of(floor1, floor2));
 
-        Creature creature = new Creature("John", location);
+        Creature creature = new Adult("John", location);
 
-        Dispatcher dispatcher = Dispatcher.instance();
+        SmartHouse smartHouse = SmartHouse.instance();
 
-        dispatcher.addLocations(house);
+        smartHouse.addLocations(house);
+        smartHouse.addCreatures(List.of(creature));
 
-        List<Device> devices = dispatcher.rooms().stream().map(Room::getDevices).flatMap(Collection::stream).toList();
+        List<Device> devices = smartHouse.rooms().stream().map(Room::getDevices).flatMap(Collection::stream).toList();
 
         // - - - - - - - - - - - - - - - - - - - - - - - - -
 
         // - - - - - - - - - - Cycle - - - - - - - - - - - -
 
         for (int i = 0; i < 24; i++) {
-            creature.goToNewLocation();
+            creature.goToNewRoom();
 
             creature.useRandomDevice();
 
-//            for (Device dev : devices.stream().filter(Device::isAlwaysOn))
-//                dev.consumeElectricity();
+
+
+        for (Device dev : devices.stream().filter(Device::isON).toList())
+            dev.use();
 
 
         }

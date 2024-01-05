@@ -1,6 +1,6 @@
 package org.example.report;
 
-import org.example.Dispatcher;
+import org.example.SmartHouse;
 import org.example.house.room.Room;
 import org.example.logger.Logger;
 
@@ -15,8 +15,8 @@ public class ConsumptionReport extends Report {
 
     @Override
     public void generateReport() {
-        Dispatcher dispatcher = Dispatcher.instance();
-        List<Room> rooms = dispatcher.rooms();
+        SmartHouse smartHouse = SmartHouse.instance();
+        List<Room> rooms = smartHouse.rooms();
         writer.println("\tConsumption report:");
         for (Room room : rooms) {
             writer.println(room.consumptionReport());

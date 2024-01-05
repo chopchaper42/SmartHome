@@ -1,66 +1,76 @@
 package org.example.device;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.SmartHouse;
+import org.example.Task;
 import org.example.device.state.DeviceState;
+import org.example.device.state.StateBroken;
+import org.example.device.state.StateOFF;
 import org.example.device.state.StateON;
 
+import java.util.Random;
 import java.util.UUID;
 
 public abstract class Device {
-    protected DeviceState state;
-    protected double consumedElectricity;
-    private double electricityConsumption;
+    @Getter
+    private final double CONSUMPTION;
     @Setter
+    protected DeviceState state;
+    @Getter
+    protected double consumedElectricity;
+    @Getter @Setter
     private String id;
+    @Getter @Setter
     protected boolean isAlwaysOn = false;
 
     protected Device(double consumption) {
         this.id = UUID.randomUUID().toString();
-        electricityConsumption = consumption;
+        this.CONSUMPTION = consumption;
+        state = new StateOFF(this);
     }
 
-//    public void consumeElectricity() { state.use(); }
+    public void consumeElectricity(double consumption) { this.consumedElectricity += consumption; }
 
     public void use() {
-        if (!isON())
-            on();
-
+        if (new Random().nextInt(100) == 1) {
+            setState(new StateBroken(this));
+            SmartHouse.instance().addTask(new Task(this, Task.Type.REPAIR));
+            // save event
+            System.out.println(getId() + " is broken. Need to repair.");
+            return;
+        }
         state.use();
-
-        if (!isAlwaysOn())
-            off();
     }
 
-    public abstract void off();
-    public abstract void on();
+    public void off() {
+        if (!isBroken())
+            state = new StateOFF(this);
+    }
+    public void on() {
+        if (!isBroken())
+            state = new StateON(this);
+    }
 
     @Override
     public String toString() {
         return id;
-        /*String[] tokens = super.toString().split("\\.");
-        return tokens[tokens.length - 1];*/
     }
 
-    public boolean isON() { return state instanceof StateON; }
+    public abstract String getDocumentation();
 
-    public double consumedElectricity() {
-        return consumedElectricity;
+    public boolean isON() {
+        return state instanceof StateON;
     }
 
-    public double electricityConsumption() {
-        return electricityConsumption;
+    public boolean isBroken() {
+        return state instanceof StateBroken;
     }
 
-    public String id() {
-        return id;
-    }
-    public void setAlwaysOn(boolean b) {
-        isAlwaysOn = b;
-    }
-
-    public boolean isAlwaysOn() {
-        return isAlwaysOn;
+    public void repair() {
+        if (isBroken())
+            state.repair();
     }
 
 }

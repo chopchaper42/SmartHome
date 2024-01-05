@@ -59,12 +59,16 @@ public class Room {
         return getDevices().stream().filter(it->clazz.isAssignableFrom(it.getClass())).map(it->(T)it).collect(Collectors.toList());
     }
 
+    public <T extends Device> boolean hasDevice(Class<T> clazz) {
+        return !devicesByType(clazz).isEmpty();
+    }
+
     public String consumptionReport() {
         StringBuilder sb = new StringBuilder();
         sb.append(id).append(":\n");
         for (Device dev : devices) {
             sb.append("\t").append(dev).append('\n');
-            sb.append("\t\tElectricity consumed: ").append(dev.consumedElectricity()).append('\n');
+            sb.append("\t\tElectricity consumed: ").append(dev.getConsumedElectricity()).append('\n');
         }
         return sb.toString();
     }
