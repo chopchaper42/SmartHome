@@ -13,6 +13,6 @@ public class FridgeON extends DeviceState {
 
     @Override
     public void use() {
-        device.consumeElectricity(CONSUMPTION);
+        device.consumeElectricity();
     }
 }

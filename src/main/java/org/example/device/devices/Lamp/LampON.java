@@ -11,6 +11,6 @@ public class LampON extends DeviceState {
 
     @Override
     public void use() {
-        device.consumeElectricity(CONSUMPTION);
+        device.consumeElectricity();
     }
 }

@@ -41,6 +41,11 @@ public class Creature {
 
     public void useRandomDevice() {
         Object[] devices = currentRoom.getDevices().stream().filter(device -> device.getClass() != Lamp.class).toArray();
-        ((Device) devices[new Random().nextInt(devices.length)]).use();
+        if (devices.length == 0)
+            return;
+
+        Device device = (Device) devices[new Random().nextInt(devices.length)];
+        device.use();
+        System.out.println(getName() + " is using " + device.id());
     }
 }

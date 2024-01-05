@@ -2,6 +2,7 @@ package org.example.report;
 
 import org.example.Dispatcher;
 import org.example.house.room.Room;
+import org.example.logger.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,5 +22,6 @@ public class ConsumptionReport extends Report {
             writer.println(room.consumptionReport());
         }
         writer.close();
+        Logger.log("ConsumptionReport generated");
     }
 }

@@ -4,6 +4,7 @@ import org.example.device.Device;
 import org.example.house.Floor;
 import org.example.house.House;
 import org.example.house.room.Room;
+import org.example.logger.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,5 +28,6 @@ public class HouseConfigurationReport extends Report {
             }
         }
         writer.close();
+        Logger.log("HouseConfigurationReport generated");
     }
 }

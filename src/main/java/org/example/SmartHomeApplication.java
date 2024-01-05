@@ -10,6 +10,7 @@ import org.example.device.devices.TV.TV;
 import org.example.house.Floor;
 import org.example.house.House;
 import org.example.house.room.Room;
+import org.example.logger.Logger;
 import org.example.report.ConsumptionReport;
 import org.example.report.HouseConfigurationReport;
 
@@ -23,6 +24,10 @@ import java.util.stream.Collectors;
 
 public class SmartHomeApplication {
     public static void main(String[] args) {
+
+        // - - - - - - - - - - Setting everything up - - - - - - - - -
+
+        Logger.log("Application started");
 
         DeviceFactory factory = DeviceFactory.getInstance();
         House house = new House("John's House");
@@ -66,15 +71,22 @@ public class SmartHomeApplication {
 
         List<Device> devices = dispatcher.rooms().stream().map(Room::getDevices).flatMap(Collection::stream).toList();
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        // - - - - - - - - - - Cycle - - - - - - - - - - - -
 
         for (int i = 0; i < 24; i++) {
             creature.goToNewLocation();
 
-            for (Device dev : devices)
-                dev.use();
+            creature.useRandomDevice();
+
+//            for (Device dev : devices.stream().filter(Device::isAlwaysOn))
+//                dev.consumeElectricity();
 
 
         }
+
+        // - - - - - - - - Reports generation - - - - - - - - - - -
 
         try {
             ConsumptionReport report = new ConsumptionReport();
@@ -84,6 +96,10 @@ public class SmartHomeApplication {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+
+        Logger.log("Application stopped");
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - -
 
     }
 }

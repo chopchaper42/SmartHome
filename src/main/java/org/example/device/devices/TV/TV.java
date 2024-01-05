@@ -12,17 +12,12 @@ public class TV extends Device {
     }
 
     @Override
-    public void use() {
-        consumedElectricity += CONSUMPTION;
-    }
-
-    @Override
     public void off() {
-
+        state = new TVOFF(this);
     }
 
     @Override
     public void on() {
-
+        state = new TVON(this);
     }
 }

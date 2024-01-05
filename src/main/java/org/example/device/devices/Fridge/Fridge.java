@@ -6,7 +6,8 @@ public class Fridge extends Device {
 
     public Fridge() {
         super(10d);
-        state = new FridgeOFF(this);
+        state = new FridgeON(this);
+        setAlwaysOn(true);
     }
     @Override
     public void use() {

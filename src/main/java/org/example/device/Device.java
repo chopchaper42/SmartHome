@@ -13,16 +13,23 @@ public abstract class Device {
     private double electricityConsumption;
     @Setter
     private String id;
+    protected boolean isAlwaysOn = false;
 
     protected Device(double consumption) {
         this.id = UUID.randomUUID().toString();
         electricityConsumption = consumption;
     }
 
-    public void consumeElectricity(double d) { consumedElectricity += d; }
+//    public void consumeElectricity() { state.use(); }
 
     public void use() {
+        if (!isON())
+            on();
+
         state.use();
+
+        if (!isAlwaysOn())
+            off();
     }
 
     public abstract void off();
@@ -47,6 +54,13 @@ public abstract class Device {
 
     public String id() {
         return id;
+    }
+    public void setAlwaysOn(boolean b) {
+        isAlwaysOn = b;
+    }
+
+    public boolean isAlwaysOn() {
+        return isAlwaysOn;
     }
 
 }
