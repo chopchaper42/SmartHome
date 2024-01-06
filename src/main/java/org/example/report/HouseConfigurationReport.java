@@ -3,7 +3,7 @@ package org.example.report;
 import org.example.device.Device;
 import org.example.house.Floor;
 import org.example.house.House;
-import org.example.house.room.Room;
+import org.example.house.Room;
 import org.example.logger.Logger;
 
 import java.io.File;

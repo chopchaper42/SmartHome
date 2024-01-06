@@ -1,0 +1,27 @@
+package org.example.report;
+
+import org.example.EventManager;
+import org.example.Task;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
+
+public class EventReport extends Report {
+    public EventReport() throws FileNotFoundException {
+        super(new File("./src/main/reports/eventReport.txt"));
+    }
+
+
+    @Override
+    public void generateReport() {
+        List<Task> events = EventManager.getInstance().getEvents();
+        for (Task task : events) {
+            String source = task.getCreatureSource() != null ? task.getCreatureSource().getName() :
+                                        task.getDeviceSource() != null ? task.getDeviceSource().getId() :
+                                        task.getRoomSource().getId();
+            writer.println("Type: " + task.getType() + "; Source: " + source + "; Target: " + task.getTarget().getName());
+        }
+        writer.close();
+    }
+}

@@ -1,23 +1,28 @@
 package org.example;
 
-import org.example.creature.Adult;
+import lombok.Setter;
+import org.example.creature.Animal;
 import org.example.creature.Creature;
 import org.example.device.Device;
 import org.example.house.Floor;
 import org.example.house.House;
-import org.example.house.room.Room;
+import org.example.house.Room;
+import org.example.house.strategy.DayStrategy;
+import org.example.house.strategy.HouseStrategy;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class SmartHouse {
 
     private static SmartHouse smartHouse;
-    private Map<String, Room> roomMap;
-    private List<Task> tasks = new LinkedList<>();
+    private Map<String, Room> roomMap = new HashMap<>();;
+//    private List<Task> tasks = new LinkedList<>();
     private Set<Creature> creatures = new HashSet<>();
 
+    private HouseStrategy strategy;
     private SmartHouse() {
-        roomMap = new HashMap<>();
+        strategy = new DayStrategy();
     }
 
     public static SmartHouse instance() {
@@ -37,7 +42,7 @@ public class SmartHouse {
         this.creatures.addAll(creatures);
     }
 
-    public Room randomRoom() {
+    public Room getRandomRoom() {
         Object[] rooms = roomMap.values().toArray();
         return (Room) rooms[new Random().nextInt(rooms.length)];
     }
@@ -46,11 +51,33 @@ public class SmartHouse {
         return roomMap.values().stream().toList();
     }
 
-    public void addTask(Task task) { tasks.add(task); }
-    public void assignTasks() {
-        for (Task task : tasks) {
-            getRandomAdult().addTask(task);
-            tasks.remove(task);
+    public void addTask(TaskSource source, Task.Type type) {
+        Task task = new Task(source, type);
+        assignTask(task);
+    }
+
+    public void assignTask(Task task) {
+        Creature creature;
+
+        if (task.getCreatureSource() != null) {
+            List<Creature> crets = getHumans(c -> c != task.getCreatureSource() && !c.isStayingInCurrentRoom());
+            creature = crets.get(new Random().nextInt(crets.size()));
+        }
+        else {
+            List<Creature> crets = getHumans(c -> !c.isStayingInCurrentRoom());
+            creature = crets.get(new Random().nextInt(crets.size()));
+        }
+
+        task.setTarget(creature);
+        creature.addTask(task);
+        EventManager.getInstance().addEvent(task);
+//        tasks.removeAll(tasks);
+    }
+
+    public void generateTask() {
+        switch (new Random().nextInt(2)) {
+            case 0 -> assignTask(new Task(getRandomRoom(), Task.Type.CLEAN_ROOM));
+            case 1 -> assignTask(new Task(getKitchen(), Task.Type.WASH_DISHES));
         }
     }
 
@@ -58,12 +85,47 @@ public class SmartHouse {
         return roomMap.getOrDefault("Kitchen", null);
     }
 
-    private Adult getRandomAdult() {
-        List<Adult> adults = creatures.stream().filter(creature -> creature instanceof Adult).map(creature -> (Adult) creature).toList();
-        return adults.get(new Random().nextInt(adults.size()));
+    private Creature getRandomPerson() {
+        return creatures.stream().filter(c -> ! (c instanceof Animal)).toList().get(new Random().nextInt(creatures.size() -1));
     }
+
 
     public Room locateDevice(Device device) {
         return rooms().stream().filter(room -> room.getDevices().contains(device)).findFirst().get();
+    }
+
+    public List<Creature> getHumans() {
+        return creatures.stream().toList();
+    }
+    public List<Creature> getHumans(Predicate<Creature> func) {
+        return creatures.stream().filter(c -> !(c instanceof Animal)).filter(func).toList();
+    }
+
+    public void executeStrategy() {
+        strategy.execute();
+    }
+
+    public void setStrategy(HouseStrategy strategy) {
+        this.strategy = strategy;
+        if (strategy instanceof DayStrategy) {
+            for (Creature creature : creatures)
+                creature.wakeUp();
+        } else {
+            for (Creature creature : getHumans(Creature::hasTasks))
+                creature.processTask();
+
+            rooms().stream()
+                    .map(Room::getDevices)
+                    .flatMap(Collection::stream)
+                    .forEach(device -> {
+                        if (!device.isAlwaysOn())
+                            device.off();
+                    });
+
+            for (Creature creature : creatures)
+                creature.sleep();
+
+        }
+
     }
 }

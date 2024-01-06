@@ -1,6 +1,7 @@
-package org.example.house.room;
+package org.example.house;
 
 import lombok.Getter;
+import org.example.TaskSource;
 import org.example.creature.Creature;
 import org.example.device.Device;
 import org.example.device.devices.Lamp.Lamp;
@@ -12,7 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
-public class Room {
+public class Room implements TaskSource {
 
     private String id;
     private Set<Creature> creatures = new HashSet<>();
@@ -23,10 +24,8 @@ public class Room {
     }
 
     public void onCreatureEnter() {
-        if (creatures.size() == 1) {
-            List<Device> lamps = devices.stream().filter(d -> d.getClass() == Lamp.class).toList();
-            lamps.forEach(Device::on);
-        }
+        List<Device> lamps = devices.stream().filter(d -> d.getClass() == Lamp.class).toList();
+        lamps.forEach(Device::on);
     }
 
     public void onCreatureLeft() {

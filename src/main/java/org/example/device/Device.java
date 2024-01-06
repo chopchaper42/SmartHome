@@ -1,10 +1,10 @@
 package org.example.device;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.SmartHouse;
 import org.example.Task;
+import org.example.TaskSource;
 import org.example.device.state.DeviceState;
 import org.example.device.state.StateBroken;
 import org.example.device.state.StateOFF;
@@ -13,7 +13,7 @@ import org.example.device.state.StateON;
 import java.util.Random;
 import java.util.UUID;
 
-public abstract class Device {
+public abstract class Device implements TaskSource {
     @Getter
     private final double CONSUMPTION;
     @Setter
@@ -24,6 +24,8 @@ public abstract class Device {
     private String id;
     @Getter @Setter
     protected boolean isAlwaysOn = false;
+    @Getter @Setter
+    protected boolean isOccupied = false;
 
     protected Device(double consumption) {
         this.id = UUID.randomUUID().toString();
@@ -33,11 +35,11 @@ public abstract class Device {
 
     public void consumeElectricity(double consumption) { this.consumedElectricity += consumption; }
 
-    public void use() {
-        if (new Random().nextInt(100) == 1) {
+    public void update() {
+        if (state instanceof StateON && new Random().nextInt(100) < 5) {
             setState(new StateBroken(this));
-            SmartHouse.instance().addTask(new Task(this, Task.Type.REPAIR));
-            // save event
+            SmartHouse.instance().addTask(this, Task.Type.REPAIR);
+//            SmartHouse.instance().addTask(new Task(this, Task.Type.REPAIR));
             System.out.println(getId() + " is broken. Need to repair.");
             return;
         }

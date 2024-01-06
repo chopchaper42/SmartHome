@@ -16,7 +16,7 @@ class DeviceTest {
 
         Assertions.assertTrue(device.isON());
 
-        device.use();
+        device.update();
 
         Assertions.assertEquals(5, device.consumedElectricity());
     }

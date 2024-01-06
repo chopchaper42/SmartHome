@@ -14,6 +14,6 @@ class DeviceFactoryTest {
 
         Lamp lamp = factory.createDevice(Lamp.class);
 
-        Assertions.assertEquals("Lamp#1", lamp.id());
+        Assertions.assertEquals("Lamp#1", lamp.getId());
     }
 }

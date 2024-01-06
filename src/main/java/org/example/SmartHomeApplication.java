@@ -1,6 +1,8 @@
 package org.example;
 
 import org.example.creature.Adult;
+import org.example.creature.Animal;
+import org.example.creature.Child;
 import org.example.creature.Creature;
 import org.example.device.Device;
 import org.example.device.device_factory.DeviceFactory;
@@ -10,9 +12,12 @@ import org.example.device.devices.Lamp.Lamp;
 import org.example.device.devices.TV.TV;
 import org.example.house.Floor;
 import org.example.house.House;
-import org.example.house.room.Room;
+import org.example.house.Room;
+import org.example.house.strategy.DayStrategy;
+import org.example.house.strategy.NightStrategy;
 import org.example.logger.Logger;
 import org.example.report.ConsumptionReport;
+import org.example.report.EventReport;
 import org.example.report.HouseConfigurationReport;
 
 import java.io.FileNotFoundException;
@@ -60,12 +65,15 @@ public class SmartHomeApplication {
 
         house.addAllFloors(List.of(floor1, floor2));
 
-        Creature creature = new Adult("John", location);
+        Creature john = new Adult("John", location);
+        Creature mary = new Adult("Mary", location2);
+        Creature bob = new Child("Bob", location);
+        Creature bobik = new Animal("Bobik", location4);
 
         SmartHouse smartHouse = SmartHouse.instance();
 
         smartHouse.addLocations(house);
-        smartHouse.addCreatures(List.of(creature));
+        smartHouse.addCreatures(List.of(john, mary, bob, bobik));
 
         List<Device> devices = smartHouse.rooms().stream().map(Room::getDevices).flatMap(Collection::stream).toList();
 
@@ -73,17 +81,19 @@ public class SmartHomeApplication {
 
         // - - - - - - - - - - Cycle - - - - - - - - - - - -
 
-        for (int i = 0; i < 24; i++) {
-            creature.goToNewRoom();
+        for (int i = 8; i < 256; i++) {
+            // system assign tasks but not every time
 
-            creature.useRandomDevice();
+            if (i % 24 == 8)
+                SmartHouse.instance().setStrategy(new DayStrategy());
+            if (i % 24 == 23)
+                SmartHouse.instance().setStrategy(new NightStrategy());
 
+            SmartHouse.instance().executeStrategy();
 
-
-        for (Device dev : devices.stream().filter(Device::isON).toList())
-            dev.use();
-
-
+            // common
+            for (Device dev : devices.stream().filter(Device::isON).toList())
+                dev.update();
         }
 
         // - - - - - - - - Reports generation - - - - - - - - - - -
@@ -93,6 +103,8 @@ public class SmartHomeApplication {
             report.generateReport();
             HouseConfigurationReport report1 = new HouseConfigurationReport(house);
             report1.generateReport();
+            EventReport report3 = new EventReport();
+            report3.generateReport();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

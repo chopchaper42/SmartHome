@@ -1,7 +1,7 @@
 package org.example.report;
 
 import org.example.SmartHouse;
-import org.example.house.room.Room;
+import org.example.house.Room;
 import org.example.logger.Logger;
 
 import java.io.File;
