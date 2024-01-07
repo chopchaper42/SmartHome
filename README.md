@@ -16,10 +16,10 @@ Každé zařízení má vlastní spotřebu elektřiny. Když zařízení je vypn
 U každého zařízení můžeme sebrat data o spotřebované elektřině.
 
 ### F5:
-Osoby a zvířata náhodně provadějí akce, které mají efekt na jiných osob/zviřat nebo na zařízení.
+Osoby a zvířata náhodně provadějí akce, které mají efekt na jiných osob/zvířat nebo na zařízení.
 
 ### F6:
-Každá osoba a každé zviře se v každem okamžiku nachazejí v jedné mistnosti a náhodně generují eventy.
+Každá osoba a každé zvíře se v každém okamžiku nachazejí v jedné místnosti a náhodně generují eventy.
 
 ### F7:
 Eventy jsou přebírány a odbavovány vhodnou osobou.
