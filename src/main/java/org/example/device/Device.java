@@ -33,8 +33,15 @@ public abstract class Device implements TaskSource {
         state = new StateOFF(this);
     }
 
+    /**
+     * Increases consumed electricity
+     * @param consumption a value to increase by
+     */
     public void consumeElectricity(double consumption) { this.consumedElectricity += consumption; }
 
+    /**
+     * Consumes electricity. May 5% chance to get broken.
+     */
     public void update() {
         if (state instanceof StateON && new Random().nextInt(100) < 5) {
             setState(new StateBroken(this));
@@ -46,30 +53,53 @@ public abstract class Device implements TaskSource {
         state.use();
     }
 
+    /**
+     * Turns the device off
+     */
     public void off() {
         if (!isBroken())
             state = new StateOFF(this);
     }
+
+    /**
+     * Turns the device on
+     */
     public void on() {
         if (!isBroken())
             state = new StateON(this);
     }
 
+    /**
+     * @return device id
+     */
     @Override
     public String toString() {
         return id;
     }
 
+    /**
+     * Returns the documentation
+     * @return device documentation
+     */
     public abstract String getDocumentation();
 
+    /**
+     * @return true if the device is on, false otherwise
+     */
     public boolean isON() {
         return state instanceof StateON;
     }
 
+    /**
+     * @return true if the device is broken, false otherwise
+     */
     public boolean isBroken() {
         return state instanceof StateBroken;
     }
 
+    /**
+     * Repairs the device if is broken
+     */
     public void repair() {
         if (isBroken())
             state.repair();

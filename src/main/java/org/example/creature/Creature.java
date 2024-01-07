@@ -10,9 +10,7 @@ import org.example.device.devices.Fridge.Fridge;
 import org.example.device.devices.Lamp.Lamp;
 import org.example.house.Room;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 @Getter
 public abstract class Creature implements TaskSource {
@@ -27,10 +25,16 @@ public abstract class Creature implements TaskSource {
     protected boolean isBusy = false;
     @Getter @Setter
     protected boolean isAsleep = false;
-//    protected int busyCounter = 0;
-//    protected Device occupiedDevice;
+    @Getter
+    protected Map<String, Integer> usageJournal = new HashMap<>();
 
 
+    /**
+     * Creates a creature with the given name, currentRoom and whether it is helpless
+     * @param name name of the creature
+     * @param currentRoom current room
+     * @param isHelpless is helpless
+     */
     public Creature(String name, Room currentRoom, boolean isHelpless) {
         this.name = name;
         this.currentRoom = currentRoom;
@@ -40,6 +44,22 @@ public abstract class Creature implements TaskSource {
         System.out.println(getName() + " is in " + currentRoom.getId());
     }
 
+    /**
+     * Processes tasks that creature has
+     */
+    public abstract void processTask();
+
+    /**
+     * Adds a task to the creature's task list
+     * @param task
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    /**
+     * Creature randomly chooses a room to go, if it is the same creature in returns, else changes the room
+     */
     public void goToNewRoom() {
         if (stayingInCurrentRoom)
             return;
@@ -49,14 +69,16 @@ public abstract class Creature implements TaskSource {
         if (newRoom == currentRoom)
             return;
 
-
         changeRoom(newRoom);
     }
 
+    /**
+     * Changes the current room on the given one. Does nothing, if {@code stayingInCurrentRoom} is {@code true}
+     * @param newRoom a room to change to
+     */
     public void changeRoom(Room newRoom) {
-        if (stayingInCurrentRoom) // TODO: Do better?
+        if (stayingInCurrentRoom)
             return;
-//            throw new RuntimeException(getName() + " is busy right now, can't go anywhere");
 
         currentRoom.removeCreature(this);
         System.out.println(name + " left " + currentRoom.getId() + " " + currentRoom.getCreatures());
@@ -71,23 +93,9 @@ public abstract class Creature implements TaskSource {
         }
     }
 
-    public void useRandomDevice() {
-        Object[] devices = currentRoom.getDevices().stream().filter(device -> device.getClass() != Lamp.class && device.getClass() != Fridge.class).toArray();
-        if (devices.length == 0)
-            return;
-
-        Device device = (Device) devices[new Random().nextInt(devices.length)];
-
-//        occupiedDevice = device;
-
-        if (!device.isON())
-            device.on();
-        device.update();
-        System.out.println(getName() + " is using " + device.getId());
-        if (!device.isAlwaysOn())
-            device.off();
-    }
-
+    /**
+     * Randomly chooses what creature will do. If it has task to do, it does it first.
+     */
     public void doSomething() {
         if (stayingInCurrentRoom)
             return;
@@ -96,8 +104,6 @@ public abstract class Creature implements TaskSource {
             processTask();
             return;
         }
-
-//        busyCounter = new Random().nextInt(1, 4);
 
         switch (new Random().nextInt(10)) {
             case 1, 3, 5 -> useRandomDevice();
@@ -108,55 +114,103 @@ public abstract class Creature implements TaskSource {
         }
     }
 
-    public abstract void processTask();
+    /**
+     * @return whether the creature's task list isn't empty
+     */
+    public boolean hasTasks() {
+        return !tasks.isEmpty();
+    }
 
+    /**
+     * Wakes up the creature
+     */
+    public void wakeUp() {
+        isAsleep = false;
+        System.out.println(getName() + " is awake now. Good morning!");
+    }
+
+    /**
+     * Makes the creature sleep
+     */
+    public void sleep() {
+        isAsleep = true;
+        System.out.println(getName() + " is sleeping now.");
+    }
+
+    /**
+     * Randomly chooses device in the current room and uses it.
+     */
+    protected void useRandomDevice() {
+        Object[] devices = currentRoom.getDevices().stream().filter(device -> device.getClass() != Lamp.class && device.getClass() != Fridge.class).toArray();
+
+        if (devices.length == 0)
+            return;
+
+        Device device = (Device) devices[new Random().nextInt(devices.length)];
+
+
+        if (usageJournal.containsKey(device.getId()))
+            usageJournal.put(device.getId(), usageJournal.get(device.getId()) + 1);
+        else
+            usageJournal.put(device.getId(), 1);
+
+        if (!device.isON())
+            device.on();
+
+        device.update();
+        System.out.println(getName() + " is using " + device.getId());
+        if (!device.isAlwaysOn())
+            device.off();
+    }
+
+    /**
+     * Changes the current room for a kitchen and uses a fridge
+     */
     protected void eat() {
         changeRoom(SmartHouse.instance().rooms().stream().filter(room -> room.hasDevice(Fridge.class)).findFirst().get());
         Fridge fridge = currentRoom.devicesByType(Fridge.class).get(0);
         System.out.println(getName() + " is eating");
     }
 
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
-
-    public void askForHelp() {
+    /**
+     * Asks other creatures in the house for help
+     */
+    protected void askForHelp() {
         setStayingInCurrentRoom(true);
         SmartHouse.instance().addTask(this, Task.Type.HELP);
-//        SmartHouse.instance().addTask(new Task(this, Task.Type.HELP));
         System.out.println(getName() + " is asking for help");
     }
 
-    public void washDishes(Room room) {
+    /**
+     * Washes the dishes
+     * @param room
+     */
+    protected void washDishes(Room room) {
         changeRoom(room);
         System.out.println(getName() + " is washing dishes");
     }
 
-    public void cleanRoom(Room room) {
+    /**
+     * Cleans the room
+     * @param room
+     */
+    protected void cleanRoom(Room room) {
         changeRoom(room);
         System.out.println(getName() + " is cleaning the " + room.getId());
     }
 
-    public void chill() {
+    /**
+     * Makes the creature rest
+     */
+    protected void chill() {
         System.out.println(getName() + " is chilling on a couch");
     }
 
+    /**
+     * @return the name of the creature
+     */
     @Override
     public String toString() {
         return getName();
-    }
-
-    public boolean hasTasks() {
-        return !tasks.isEmpty();
-    }
-
-    public void wakeUp() {
-        isAsleep = false;
-        System.out.println(getName() + " is awake now. Good morning!");
-    }
-
-    public void sleep() {
-        isAsleep = true;
-        System.out.println(getName() + " is sleeping now.");
     }
 }

@@ -12,11 +12,6 @@ public class Child extends Creature {
     }
 
     @Override
-    protected void eat() {
-        askForFood();
-    }
-
-    @Override
     public void doSomething() {
         if (isStayingInCurrentRoom())
             return;
@@ -45,9 +40,16 @@ public class Child extends Creature {
         }
     }
 
-    public void askForFood() {
+    /**
+     * Changes the current room to kitchen and asks for food
+     */
+    @Override
+    protected void eat() {
+        askForFood();
+    }
+
+    private void askForFood() {
         changeRoom(SmartHouse.instance().getKitchen());
-//        SmartHouse.instance().addTask(new Task(this, Task.Type.FEED));
         SmartHouse.instance().addTask(this, Task.Type.FEED);
         setStayingInCurrentRoom(true);
         System.out.println(getName() + " says: I wanna eat!");

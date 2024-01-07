@@ -22,6 +22,10 @@ public class Adult extends Creature {
         }
     }
 
+    /**
+     * Goes to the creature who asked for help and helps it
+     * @param creature the creature who asked for help
+     */
     private void helpCreature(Creature creature) {
         changeRoom(creature.currentRoom);
         System.out.println(getName() + " is helping " + creature.getName());

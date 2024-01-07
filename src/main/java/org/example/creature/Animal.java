@@ -11,13 +11,9 @@ public class Animal extends Creature {
         super(name, currentRoom, true);
     }
 
-    @Override
-    protected void eat() {
-        changeRoom(SmartHouse.instance().getKitchen());
-        setStayingInCurrentRoom(true);
-        askForFood();
-    }
-
+    /**
+     * Randomly chooses what to do
+     */
     @Override
     public void doSomething() {
         if (isStayingInCurrentRoom())
@@ -34,8 +30,21 @@ public class Animal extends Creature {
     @Override
     public void processTask() {}
 
+    /**
+     * Changes the current room to kitchen, stays there and asks for food
+     */
     @Override
-    public void chill() {
+    protected void eat() {
+        changeRoom(SmartHouse.instance().getKitchen());
+        setStayingInCurrentRoom(true);
+        askForFood();
+    }
+
+    /**
+     * Naps on its bed
+     */
+    @Override
+    protected void chill() {
         System.out.println(getName() + " is napping on its bed");
     }
 

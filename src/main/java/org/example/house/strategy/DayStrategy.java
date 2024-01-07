@@ -12,7 +12,7 @@ public class DayStrategy implements HouseStrategy {
             SmartHouse.instance().generateTask();
         }
 
-        for (Creature creature : SmartHouse.instance().getHumans())
+        for (Creature creature : SmartHouse.instance().getCreatures())
             creature.doSomething();
     }
 }

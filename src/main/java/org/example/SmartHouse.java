@@ -1,6 +1,5 @@
 package org.example;
 
-import lombok.Setter;
 import org.example.creature.Animal;
 import org.example.creature.Creature;
 import org.example.device.Device;
@@ -17,9 +16,7 @@ public class SmartHouse {
 
     private static SmartHouse smartHouse;
     private Map<String, Room> roomMap = new HashMap<>();;
-//    private List<Task> tasks = new LinkedList<>();
     private Set<Creature> creatures = new HashSet<>();
-
     private HouseStrategy strategy;
     private SmartHouse() {
         strategy = new DayStrategy();
@@ -60,18 +57,17 @@ public class SmartHouse {
         Creature creature;
 
         if (task.getCreatureSource() != null) {
-            List<Creature> crets = getHumans(c -> c != task.getCreatureSource() && !c.isStayingInCurrentRoom());
+            List<Creature> crets = getCreatures(c -> c != task.getCreatureSource() && !c.isStayingInCurrentRoom());
             creature = crets.get(new Random().nextInt(crets.size()));
         }
         else {
-            List<Creature> crets = getHumans(c -> !c.isStayingInCurrentRoom());
+            List<Creature> crets = getCreatures(c -> !c.isStayingInCurrentRoom());
             creature = crets.get(new Random().nextInt(crets.size()));
         }
 
         task.setTarget(creature);
         creature.addTask(task);
         EventManager.getInstance().addEvent(task);
-//        tasks.removeAll(tasks);
     }
 
     public void generateTask() {
@@ -94,10 +90,10 @@ public class SmartHouse {
         return rooms().stream().filter(room -> room.getDevices().contains(device)).findFirst().get();
     }
 
-    public List<Creature> getHumans() {
+    public List<Creature> getCreatures() {
         return creatures.stream().toList();
     }
-    public List<Creature> getHumans(Predicate<Creature> func) {
+    public List<Creature> getCreatures(Predicate<Creature> func) {
         return creatures.stream().filter(c -> !(c instanceof Animal)).filter(func).toList();
     }
 
@@ -111,7 +107,7 @@ public class SmartHouse {
             for (Creature creature : creatures)
                 creature.wakeUp();
         } else {
-            for (Creature creature : getHumans(Creature::hasTasks))
+            for (Creature creature : getCreatures(Creature::hasTasks))
                 creature.processTask();
 
             rooms().stream()

@@ -6,16 +6,21 @@ import org.example.creature.Child;
 import org.example.creature.Creature;
 import org.example.device.Device;
 import org.example.device.device_factory.DeviceFactory;
+import org.example.device.devices.AudioPlayer.AudioPlayer;
+import org.example.device.devices.Bicycle.Bicycle;
+import org.example.device.devices.CoffeMachine.CoffeeMachine;
 import org.example.device.devices.Computer.Computer;
 import org.example.device.devices.Fridge.Fridge;
 import org.example.device.devices.Lamp.Lamp;
 import org.example.device.devices.TV.TV;
+import org.example.device.devices.Treadmill.Treadmill;
 import org.example.house.Floor;
 import org.example.house.House;
 import org.example.house.Room;
 import org.example.house.strategy.DayStrategy;
 import org.example.house.strategy.NightStrategy;
 import org.example.logger.Logger;
+import org.example.report.ActivityAndUsageReport;
 import org.example.report.ConsumptionReport;
 import org.example.report.EventReport;
 import org.example.report.HouseConfigurationReport;
@@ -37,10 +42,13 @@ public class SmartHomeApplication {
         Floor floor1 = new Floor(1);
         Floor floor2 = new Floor(2);
 
-        Room location = new Room("Living Room");
-        Room location2 = new Room("Bedroom");
+        Room location1 = new Room("Living Room");
+        Room location2 = new Room("Bedroom #1");
         Room location3 = new Room("Attic");
         Room location4 = new Room("Kitchen");
+        Room location5 = new Room("Bedroom #2");
+        Room location6 = new Room("Basement");
+        Room location7 = new Room("Home Office");
 
         Lamp lamp1 = factory.createDevice(Lamp.class);
         Lamp lamp2 = factory.createDevice(Lamp.class);
@@ -50,30 +58,48 @@ public class SmartHomeApplication {
         Lamp lamp6 = factory.createDevice(Lamp.class);
         Lamp lamp7 = factory.createDevice(Lamp.class);
         Lamp lamp8 = factory.createDevice(Lamp.class);
+        Lamp lamp9 = factory.createDevice(Lamp.class);
+        Lamp lamp10 = factory.createDevice(Lamp.class);
+        Lamp lamp11 = factory.createDevice(Lamp.class);
+        Lamp lamp12 = factory.createDevice(Lamp.class);
+        Lamp lamp13 = factory.createDevice(Lamp.class);
+        Lamp lamp14 = factory.createDevice(Lamp.class);
 
         TV tv = factory.createDevice(TV.class);
-        Computer computer = factory.createDevice(Computer.class);
+        Computer computer1 = factory.createDevice(Computer.class);
         Fridge fridge = factory.createDevice(Fridge.class);
+        Computer computer2 = factory.createDevice(Computer.class);
+        CoffeeMachine coffeeMachine1 = factory.createDevice(CoffeeMachine.class);
+        Treadmill treadmill1 = factory.createDevice(Treadmill.class);
+        Bicycle bicycle1 = factory.createDevice(Bicycle.class);
+        AudioPlayer audioPlayer1 = factory.createDevice(AudioPlayer.class);
 
-        location.addAllDevices(List.of(lamp1, lamp2, computer));
+        location1.addAllDevices(List.of(lamp1, lamp2, computer1));
         location2.addAllDevices(List.of(lamp3, lamp4, tv));
-        location3.addAllDevices(List.of(lamp5, lamp6));
-        location4.addAllDevices(List.of(lamp7, lamp8, fridge));
+        location3.addAllDevices(List.of(lamp5, lamp6, audioPlayer1));
+        location4.addAllDevices(List.of(lamp7, lamp8, fridge, coffeeMachine1));
+        location5.addAllDevices(List.of(lamp9, lamp10, computer2));
+        location6.addAllDevices(List.of(lamp11, lamp12, bicycle1));
+        location7.addAllDevices(List.of(lamp13, lamp14, treadmill1));
 
-        floor1.addAllRooms(List.of(location, location4));
-        floor2.addAllRooms(List.of(location2, location3));
+        floor1.addAllRooms(List.of(location1, location4, location5, location7));
+        floor2.addAllRooms(List.of(location2, location3, location6));
 
         house.addAllFloors(List.of(floor1, floor2));
 
-        Creature john = new Adult("John", location);
+        Creature john = new Adult("John", location1);
         Creature mary = new Adult("Mary", location2);
-        Creature bob = new Child("Bob", location);
+        Creature bob = new Child("Bob", location1);
         Creature bobik = new Animal("Bobik", location4);
+        Creature anna = new Adult("Anna", location4);
+        Creature karl = new Child("Karl", location3);
+        Creature biba = new Animal("Biba", location6);
+        Creature boba = new Animal("Boba", location7);
 
         SmartHouse smartHouse = SmartHouse.instance();
 
         smartHouse.addLocations(house);
-        smartHouse.addCreatures(List.of(john, mary, bob, bobik));
+        smartHouse.addCreatures(List.of(john, mary, bob, bobik, anna, karl, biba, boba));
 
         List<Device> devices = smartHouse.rooms().stream().map(Room::getDevices).flatMap(Collection::stream).toList();
 
@@ -99,12 +125,14 @@ public class SmartHomeApplication {
         // - - - - - - - - Reports generation - - - - - - - - - - -
 
         try {
-            ConsumptionReport report = new ConsumptionReport();
-            report.generateReport();
-            HouseConfigurationReport report1 = new HouseConfigurationReport(house);
+            ConsumptionReport report1 = new ConsumptionReport();
             report1.generateReport();
+            HouseConfigurationReport report2 = new HouseConfigurationReport(house);
+            report2.generateReport();
             EventReport report3 = new EventReport();
             report3.generateReport();
+            ActivityAndUsageReport report4 = new ActivityAndUsageReport(SmartHouse.instance().getCreatures(c -> !(c instanceof Animal)));
+            report4.generateReport();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

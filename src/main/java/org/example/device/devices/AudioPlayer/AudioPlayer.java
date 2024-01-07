@@ -5,7 +5,10 @@ import org.example.device.state.StateOFF;
 import org.example.device.state.StateON;
 
 public class AudioPlayer extends Device {
-    protected AudioPlayer() {
+    /**
+     * Creates an audio player
+     */
+    public AudioPlayer() {
         super(7d);
     }
 
