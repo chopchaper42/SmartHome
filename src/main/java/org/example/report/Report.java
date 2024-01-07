@@ -11,5 +11,8 @@ public abstract class Report {
         writer = new PrintWriter(file);
     }
 
+    /**
+     * Generates a report to the report file
+     */
     public abstract void generateReport();
 }

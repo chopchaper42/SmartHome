@@ -7,6 +7,10 @@ public abstract class DeviceState {
     public DeviceState(Device device){
         this.device = device;
     }
+
+    /**
+     * Uses the device
+     */
     public abstract void use();
     public void repair() {
         System.out.println("No need to repair the device");

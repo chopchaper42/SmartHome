@@ -9,6 +9,10 @@ public class Logger {
 
     private Logger() {}
 
+    /**
+     * Writes the given string to the log file
+     * @param log the string to log
+     */
     public static void log(String log) {
         try {
             writer = new BufferedWriter(new FileWriter(logFile, true));

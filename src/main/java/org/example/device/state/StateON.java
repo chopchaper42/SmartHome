@@ -7,6 +7,9 @@ public class StateON extends DeviceState {
         super(device);
     }
 
+    /**
+     * Increases consumed electricity
+     */
     @Override
     public void use() {
         device.consumeElectricity(device.getCONSUMPTION());

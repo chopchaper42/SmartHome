@@ -26,6 +26,11 @@ public class Task {
     @Getter
     private Task.Type type;
 
+    /**
+     * Creates a task
+     * @param source task source
+     * @param taskType task type
+     */
     public Task(TaskSource source, Task.Type taskType) {
         if (source instanceof Device)
             this.deviceSource = (Device) source;

@@ -50,7 +50,7 @@ public class Animal extends Creature {
 
     private void askForFood() {
         setStayingInCurrentRoom(true);
-        SmartHouse.instance().addTask(this, Task.Type.FEED);
+        SmartHouse.instance().assignTask(this, Task.Type.FEED);
         System.out.println(getName() + " says: Mwmouf");
     }
 }

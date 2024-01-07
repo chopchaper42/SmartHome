@@ -6,6 +6,9 @@ import org.example.device.state.StateON;
 
 public class Lamp extends Device {
 
+    /**
+     * Creates a lamp
+     */
     public Lamp() {
         super(3d);
         state = new StateOFF(this);

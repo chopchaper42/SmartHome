@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Fridge extends Device {
 
+    /**
+     * Creates a fridge
+     */
     public Fridge() {
         super(10d);
         state = new StateON(this);

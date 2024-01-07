@@ -167,7 +167,7 @@ public abstract class Creature implements TaskSource {
      * Changes the current room for a kitchen and uses a fridge
      */
     protected void eat() {
-        changeRoom(SmartHouse.instance().rooms().stream().filter(room -> room.hasDevice(Fridge.class)).findFirst().get());
+        changeRoom(SmartHouse.instance().getRooms().stream().filter(room -> room.hasDevice(Fridge.class)).findFirst().get());
         Fridge fridge = currentRoom.devicesByType(Fridge.class).get(0);
         System.out.println(getName() + " is eating");
     }
@@ -177,7 +177,7 @@ public abstract class Creature implements TaskSource {
      */
     protected void askForHelp() {
         setStayingInCurrentRoom(true);
-        SmartHouse.instance().addTask(this, Task.Type.HELP);
+        SmartHouse.instance().assignTask(this, Task.Type.HELP);
         System.out.println(getName() + " is asking for help");
     }
 

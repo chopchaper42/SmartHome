@@ -29,31 +29,135 @@ public class SmartHouse {
         return smartHouse;
     }
 
+    /**
+     * Adds all locations from the given house
+     * @param house the house to get locations from
+     */
     public void addLocations(House house) {
         List<Room> rooms = house.getFloors().stream().map(Floor::getRooms).flatMap(Collection::stream).toList();
         for (Room room : rooms)
             roomMap.put(room.getId(), room);
     }
 
+    /**
+     * Adds creatures to the creatures list
+     * @param creatures
+     */
     public void addCreatures(Collection<Creature> creatures) {
         this.creatures.addAll(creatures);
     }
 
+    /**
+     * Returns a random room
+     * @return a random room
+     */
     public Room getRandomRoom() {
         Object[] rooms = roomMap.values().toArray();
         return (Room) rooms[new Random().nextInt(rooms.length)];
     }
 
-    public List<Room> rooms() {
+    /**
+     * Returns a list of rooms in the house
+     * @return a list of rooms
+     */
+    public List<Room> getRooms() {
         return roomMap.values().stream().toList();
     }
 
-    public void addTask(TaskSource source, Task.Type type) {
+    /**
+     * Assigns task to a random creature
+     * @param source task source
+     * @param type task type
+     */
+    public void assignTask(TaskSource source, Task.Type type) {
         Task task = new Task(source, type);
-        assignTask(task);
+        assignTaskToCreature(task);
     }
 
-    public void assignTask(Task task) {
+    /**
+     * Assigns to clean a room or to wash dishes to a random creature
+     */
+    public void generateTask() {
+        switch (new Random().nextInt(2)) {
+            case 0 -> assignTaskToCreature(new Task(getRandomRoom(), Task.Type.CLEAN_ROOM));
+            case 1 -> assignTaskToCreature(new Task(getKitchen(), Task.Type.WASH_DISHES));
+        }
+    }
+
+    /**
+     * Returns a kitchen
+     * @return room with a name "Kitchen" or null
+     */
+    public Room getKitchen() {
+        for (String s : roomMap.keySet())
+            if (s.contains("Kitchen"))
+                return roomMap.get(s);
+        return null;
+    }
+
+
+    /**
+     * Locates the device
+     * @param device the device to locate
+     * @return the room where device is
+     */
+    public Room locateDevice(Device device) {
+        return getRooms().stream().filter(room -> room.getDevices().contains(device)).findFirst().get();
+    }
+
+    /**
+     * Returns a list of creatures
+     * @return a list of creatures
+     */
+    public List<Creature> getCreatures() {
+        return creatures.stream().toList();
+    }
+
+    /**
+     * Filters creatures list
+     * @param func a filter
+     * @return a filtered list
+     */
+    public List<Creature> getCreatures(Predicate<Creature> func) {
+        return creatures.stream().filter(c -> !(c instanceof Animal)).filter(func).toList();
+    }
+
+    /**
+     * Executes a house's strategy
+     */
+    public void executeStrategy() {
+        strategy.execute();
+    }
+
+    /**
+     * Sets a strategy
+     * @param strategy
+     */
+    public void setStrategy(HouseStrategy strategy) {
+        this.strategy = strategy;
+        if (strategy instanceof DayStrategy) {
+            for (Creature creature : creatures)
+                creature.wakeUp();
+        } else {
+            for (Creature creature : getCreatures(Creature::hasTasks))
+                creature.processTask();
+
+            getRooms().stream()
+                    .map(Room::getDevices)
+                    .flatMap(Collection::stream)
+                    .forEach(device -> {
+                        if (!device.isAlwaysOn())
+                            device.off();
+                    });
+
+            for (Creature creature : creatures)
+                creature.sleep();
+
+        }
+
+    }
+
+    private void assignTaskToCreature(Task task) {
         Creature creature;
 
         if (task.getCreatureSource() != null) {
@@ -70,58 +174,7 @@ public class SmartHouse {
         EventManager.getInstance().addEvent(task);
     }
 
-    public void generateTask() {
-        switch (new Random().nextInt(2)) {
-            case 0 -> assignTask(new Task(getRandomRoom(), Task.Type.CLEAN_ROOM));
-            case 1 -> assignTask(new Task(getKitchen(), Task.Type.WASH_DISHES));
-        }
-    }
-
-    public Room getKitchen() {
-        return roomMap.getOrDefault("Kitchen", null);
-    }
-
     private Creature getRandomPerson() {
         return creatures.stream().filter(c -> ! (c instanceof Animal)).toList().get(new Random().nextInt(creatures.size() -1));
-    }
-
-
-    public Room locateDevice(Device device) {
-        return rooms().stream().filter(room -> room.getDevices().contains(device)).findFirst().get();
-    }
-
-    public List<Creature> getCreatures() {
-        return creatures.stream().toList();
-    }
-    public List<Creature> getCreatures(Predicate<Creature> func) {
-        return creatures.stream().filter(c -> !(c instanceof Animal)).filter(func).toList();
-    }
-
-    public void executeStrategy() {
-        strategy.execute();
-    }
-
-    public void setStrategy(HouseStrategy strategy) {
-        this.strategy = strategy;
-        if (strategy instanceof DayStrategy) {
-            for (Creature creature : creatures)
-                creature.wakeUp();
-        } else {
-            for (Creature creature : getCreatures(Creature::hasTasks))
-                creature.processTask();
-
-            rooms().stream()
-                    .map(Room::getDevices)
-                    .flatMap(Collection::stream)
-                    .forEach(device -> {
-                        if (!device.isAlwaysOn())
-                            device.off();
-                    });
-
-            for (Creature creature : creatures)
-                creature.sleep();
-
-        }
-
     }
 }

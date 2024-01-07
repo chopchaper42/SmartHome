@@ -16,6 +16,9 @@ public class HouseConfigurationReport extends Report {
         this.house = house;
     }
 
+    /**
+     * Generates a HouseConfiguration report
+     */
     @Override
     public void generateReport() {
         writer.println(house.getName() + ":");

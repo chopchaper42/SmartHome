@@ -23,11 +23,17 @@ public class Room implements TaskSource {
         this.id = id;
     }
 
+    /**
+     * Turns all lamp on
+     */
     public void onCreatureEnter() {
         List<Device> lamps = devices.stream().filter(d -> d.getClass() == Lamp.class).toList();
         lamps.forEach(Device::on);
     }
 
+    /**
+     * Turns all lams off is there is no creatures left in the room
+     */
     public void onCreatureLeft() {
         if (creatures.isEmpty()) {
             List<Device> lamps = devices.stream().filter(d -> d.getClass() == Lamp.class).toList();
@@ -35,33 +41,64 @@ public class Room implements TaskSource {
         }
     }
 
+    /**
+     * Adds the creature to the creatures list
+     * @param c the creature to add
+     */
     public void addCreature(Creature c) {
         creatures.add(c);
         onCreatureEnter();
     }
 
+    /**
+     * Removes the creature from the creatures list
+     * @param c the creature to remove
+     */
     public void removeCreature(Creature c) {
         creatures.remove(c);
         onCreatureLeft();
     }
 
+    /**
+     * Adds the device to the devices list
+     * @param d the device to add
+     */
     public void addDevice(Device d) {
         devices.add(d);
     }
 
+    /**
+     * Adds the collection of devices to the devices list
+     * @param d the collection to add
+     */
     public void addAllDevices(Collection<Device> d) {
         devices.addAll(d);
     }
 
-
+    /**
+     * Returns all devices of the given type
+     * @param clazz the type of devices to return
+     * @return List of devices of class clazz
+     * @param <T> Device inheritors
+     */
     public <T extends Device> List<T> devicesByType(Class<T> clazz) {
         return getDevices().stream().filter(it->clazz.isAssignableFrom(it.getClass())).map(it->(T)it).collect(Collectors.toList());
     }
 
+    /**
+     * Returns true if the room has a device of the given type, false otherwise
+     * @param clazz the class of a device to check if the room has
+     * @return
+     * @param <T> Device inheritors
+     */
     public <T extends Device> boolean hasDevice(Class<T> clazz) {
         return !devicesByType(clazz).isEmpty();
     }
 
+    /**
+     * Returns a formatted string with the data about consumption of the device
+     * @return consumption report string
+     */
     public String consumptionReport() {
         StringBuilder sb = new StringBuilder();
         sb.append(id).append(":\n");

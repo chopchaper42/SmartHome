@@ -2,6 +2,7 @@ package org.example.report;
 
 import org.example.EventManager;
 import org.example.Task;
+import org.example.logger.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +14,9 @@ public class EventReport extends Report {
     }
 
 
+    /**
+     * Generates an Event report
+     */
     @Override
     public void generateReport() {
         List<Task> events = EventManager.getInstance().getEvents();
@@ -23,5 +27,6 @@ public class EventReport extends Report {
             writer.println("Type: " + task.getType() + "; Source: " + source + "; Target: " + task.getTarget().getName());
         }
         writer.close();
+        Logger.log("EventReport generated");
     }
 }

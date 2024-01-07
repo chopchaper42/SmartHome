@@ -13,10 +13,13 @@ public class ConsumptionReport extends Report {
         super(new File("./src/main/reports/consumptionReport.txt"));
     }
 
+    /**
+     * Generates a Consumption report
+     */
     @Override
     public void generateReport() {
         SmartHouse smartHouse = SmartHouse.instance();
-        List<Room> rooms = smartHouse.rooms();
+        List<Room> rooms = smartHouse.getRooms();
         writer.println("\tConsumption report:");
         for (Room room : rooms) {
             writer.println(room.consumptionReport());

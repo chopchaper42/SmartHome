@@ -1,6 +1,7 @@
 package org.example.report;
 
 import org.example.creature.Creature;
+import org.example.logger.Logger;
 
 import javax.swing.plaf.basic.BasicRadioButtonMenuItemUI;
 import java.io.File;
@@ -15,6 +16,9 @@ public class ActivityAndUsageReport extends Report {
         this.creatures = creatures;
     }
 
+    /**
+     * Generates an ActivityAndUsage report
+     */
     @Override
     public void generateReport() {
         for (Creature creature : creatures) {
@@ -23,5 +27,6 @@ public class ActivityAndUsageReport extends Report {
                 writer.println("Device: " + e.getKey() + "; Used: " + e.getValue());
         }
         writer.close();
+        Logger.log("ActivityAndUsageReport generated");
     }
 }

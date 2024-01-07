@@ -7,11 +7,17 @@ public class StateBroken extends DeviceState {
         super(device);
     }
 
+    /**
+     * Prints to the console a message "The device is broken!"
+     */
     @Override
     public void use() {
         System.out.println("The device is broken!");
     }
 
+    /**
+     * Repairs the device
+     */
     @Override
     public void repair() {
         System.out.println("Reading documentation: " + device.getDocumentation());
