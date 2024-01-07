@@ -13,7 +13,7 @@ public class Child extends Creature {
 
     @Override
     public void doSomething() {
-        if (isStayingInCurrentRoom())
+        if (isWaiting())
             return;
 
         if (!tasks.isEmpty()) {
@@ -51,13 +51,13 @@ public class Child extends Creature {
     private void askForFood() {
         changeRoom(SmartHouse.instance().getKitchen());
         SmartHouse.instance().assignTask(this, Task.Type.FEED);
-        setStayingInCurrentRoom(true);
+        setWaiting(true);
         System.out.println(getName() + " says: I wanna eat!");
     }
 
     private void helpCreature(Creature creature) {
         changeRoom(creature.currentRoom);
         System.out.println(getName() + " is helping " + creature.getName());
-        creature.setStayingInCurrentRoom(false);
+        creature.setWaiting(false);
     }
 }

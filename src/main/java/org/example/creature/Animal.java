@@ -16,7 +16,7 @@ public class Animal extends Creature {
      */
     @Override
     public void doSomething() {
-        if (isStayingInCurrentRoom())
+        if (isWaiting())
             return;
 
         switch (new Random().nextInt(10)) {
@@ -36,7 +36,7 @@ public class Animal extends Creature {
     @Override
     protected void eat() {
         changeRoom(SmartHouse.instance().getKitchen());
-        setStayingInCurrentRoom(true);
+        setWaiting(true);
         askForFood();
     }
 
@@ -49,7 +49,7 @@ public class Animal extends Creature {
     }
 
     private void askForFood() {
-        setStayingInCurrentRoom(true);
+        setWaiting(true);
         SmartHouse.instance().assignTask(this, Task.Type.FEED);
         System.out.println(getName() + " says: Mwmouf");
     }

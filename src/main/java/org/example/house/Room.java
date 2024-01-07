@@ -1,6 +1,7 @@
 package org.example.house;
 
 import lombok.Getter;
+import org.example.SmartHouse;
 import org.example.TaskSource;
 import org.example.creature.Creature;
 import org.example.device.Device;

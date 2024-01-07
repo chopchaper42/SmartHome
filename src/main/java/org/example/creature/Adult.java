@@ -29,7 +29,7 @@ public class Adult extends Creature {
     private void helpCreature(Creature creature) {
         changeRoom(creature.currentRoom);
         System.out.println(getName() + " is helping " + creature.getName());
-        creature.setStayingInCurrentRoom(false);
+        creature.setWaiting(false);
     }
 
     private void feedHelplessCreature(Creature creature) {
@@ -47,7 +47,7 @@ public class Adult extends Creature {
 
         System.out.println(getName() + " is feeding " + creature.getName());
 
-        creature.setStayingInCurrentRoom(false);
+        creature.setWaiting(false);
     }
 
     private void repairDevice(Device device) {

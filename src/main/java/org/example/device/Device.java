@@ -101,8 +101,7 @@ public abstract class Device implements TaskSource {
      * Repairs the device if is broken
      */
     public void repair() {
-        if (isBroken())
-            state.repair();
+        state.repair();
     }
 
 }

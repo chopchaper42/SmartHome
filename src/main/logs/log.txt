@@ -278,3 +278,16 @@ Sun Jan 07 09:05:06 CET 2024: HouseConfigurationReport generated
 Sun Jan 07 09:05:06 CET 2024: EventReport generated
 Sun Jan 07 09:05:06 CET 2024: ActivityAndUsageReport generated
 Sun Jan 07 09:05:06 CET 2024: Application stopped
+Sun Jan 07 13:39:36 CET 2024: Application started
+Sun Jan 07 13:39:43 CET 2024: Application started
+Sun Jan 07 13:39:45 CET 2024: ConsumptionReport generated
+Sun Jan 07 13:39:45 CET 2024: HouseConfigurationReport generated
+Sun Jan 07 13:39:45 CET 2024: EventReport generated
+Sun Jan 07 13:39:45 CET 2024: ActivityAndUsageReport generated
+Sun Jan 07 13:39:45 CET 2024: Application stopped
+Sun Jan 07 14:44:35 CET 2024: Application started
+Sun Jan 07 14:44:38 CET 2024: ConsumptionReport generated
+Sun Jan 07 14:44:38 CET 2024: HouseConfigurationReport generated
+Sun Jan 07 14:44:38 CET 2024: EventReport generated
+Sun Jan 07 14:44:38 CET 2024: ActivityAndUsageReport generated
+Sun Jan 07 14:44:38 CET 2024: Application stopped

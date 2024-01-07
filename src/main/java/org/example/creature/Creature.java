@@ -18,7 +18,7 @@ public abstract class Creature implements TaskSource {
     protected Room currentRoom;
     protected Queue<Task> tasks;
     @Setter @Getter
-    private boolean stayingInCurrentRoom;
+    private boolean isWaiting;
     @Getter
     private boolean isHelpless;
     @Setter @Getter
@@ -58,16 +58,16 @@ public abstract class Creature implements TaskSource {
     }
 
     /**
-     * Creature randomly chooses a room to go, if it is the same creature in returns, else changes the room
+     * Creature randomly chooses a room to go and changes the room
      */
     public void goToNewRoom() {
-        if (stayingInCurrentRoom)
+        if (isWaiting)
             return;
 
-        Room newRoom = SmartHouse.instance().getRandomRoom();
-
-        if (newRoom == currentRoom)
-            return;
+        Room newRoom;
+        do {
+            newRoom = SmartHouse.instance().getRandomRoom();
+        } while (currentRoom == newRoom);
 
         changeRoom(newRoom);
     }
@@ -77,7 +77,7 @@ public abstract class Creature implements TaskSource {
      * @param newRoom a room to change to
      */
     public void changeRoom(Room newRoom) {
-        if (stayingInCurrentRoom)
+        if (isWaiting)
             return;
 
         currentRoom.removeCreature(this);
@@ -97,7 +97,7 @@ public abstract class Creature implements TaskSource {
      * Randomly chooses what creature will do. If it has task to do, it does it first.
      */
     public void doSomething() {
-        if (stayingInCurrentRoom)
+        if (isWaiting)
             return;
 
         if (!tasks.isEmpty()) {
@@ -176,7 +176,7 @@ public abstract class Creature implements TaskSource {
      * Asks other creatures in the house for help
      */
     protected void askForHelp() {
-        setStayingInCurrentRoom(true);
+        setWaiting(true);
         SmartHouse.instance().assignTask(this, Task.Type.HELP);
         System.out.println(getName() + " is asking for help");
     }

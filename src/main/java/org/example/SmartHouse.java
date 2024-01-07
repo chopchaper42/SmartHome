@@ -157,15 +157,33 @@ public class SmartHouse {
 
     }
 
+    /**
+     * Removes all creatures form the creatures list
+     */
+    public void purgeCreatures() {
+        creatures = new HashSet<>();
+    }
+
+    /**
+     * Removes all creatures form the creatures list
+     */
+    public void purgeRooms() {
+        roomMap = new HashMap<>();
+    }
+
+    public void addRoom(Room room) {
+        roomMap.put(room.getId(), room);
+    }
+
     private void assignTaskToCreature(Task task) {
         Creature creature;
 
         if (task.getCreatureSource() != null) {
-            List<Creature> crets = getCreatures(c -> c != task.getCreatureSource() && !c.isStayingInCurrentRoom());
+            List<Creature> crets = getCreatures(c -> c != task.getCreatureSource() && !c.isWaiting());
             creature = crets.get(new Random().nextInt(crets.size()));
         }
         else {
-            List<Creature> crets = getCreatures(c -> !c.isStayingInCurrentRoom());
+            List<Creature> crets = getCreatures(c -> !c.isWaiting());
             creature = crets.get(new Random().nextInt(crets.size()));
         }
 
