@@ -46,7 +46,6 @@ public abstract class Device implements TaskSource {
         if (state instanceof StateON && new Random().nextInt(100) < 5) {
             setState(new StateBroken(this));
             SmartHouse.instance().assignTask(this, Task.Type.REPAIR);
-//            SmartHouse.instance().addTask(new Task(this, Task.Type.REPAIR));
             System.out.println(getId() + " is broken. Need to repair.");
             return;
         }
