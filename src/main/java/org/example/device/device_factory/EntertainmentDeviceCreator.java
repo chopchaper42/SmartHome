@@ -13,9 +13,25 @@ import static org.example.device.DeviceTypes.ENTERTAINMENT_DEVICE;
 import org.example.device.EntertainmentDeviceTypes;
 
 public class EntertainmentDeviceCreator extends DeviceFactory<EntertainmentDeviceTypes>{
-    //redo later
+
+    private static EntertainmentDeviceCreator instance = null;
+
+    /**
+     * Private singleton constructor
+     */
+    private EntertainmentDeviceCreator(){}
+
+    /**
+     * Method for getting Entertainment Device Creator instance - Singleton pattern
+     * @return instance of Entertainment Device Creator
+     */
+    public static EntertainmentDeviceCreator getInstance() {
+        if (instance == null) { instance = new EntertainmentDeviceCreator();}
+        return instance;
+    }
+
     @Override
-    public Device createDevice(Room room, DeviceTypes type, EntertainmentDeviceTypes concreteDevice){
+    public Device createDevice(Room room, EntertainmentDeviceTypes concreteDevice){
             Device device = switch (concreteDevice) {
                 case TV -> new TV(room);
                 case MOBILE -> new Mobile(room);

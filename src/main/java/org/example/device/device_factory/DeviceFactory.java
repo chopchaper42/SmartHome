@@ -6,5 +6,5 @@ import org.example.house.Room;
 
 public abstract class DeviceFactory<T> {
     //private concreteDevice;
-    public abstract Device createDevice(Room room, DeviceTypes type, T concreteDevice);
+    public abstract Device createDevice(Room room, T concreteDevice);
 }

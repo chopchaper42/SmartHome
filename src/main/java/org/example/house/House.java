@@ -2,30 +2,40 @@ package org.example.house;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.example.creature.Creature;
-import org.example.house.strategy.Strategy;
-import org.example.report.Reporter;
+import org.example.house.floors.Floor;
+import org.example.report.Report;
 
 import java.util.List;
 
+/**
+ * Class representing House - Singleton pattern (Lazy initialization?)
+ */
 @Data
 @AllArgsConstructor
+@Getter
+@Setter
 public class House {
     private HouseControlSystem controlSystem;
-    private List<HouseNode> houseComposition;
     public List<Creature> creatures;
     private List<Floor> floors;
-    private Reporter reporter;
+    private Report reporter;
+    private static House INSTANCE;
 
-    private Strategy strategy;  //???
+    public House() {}
 
-    public void strategyScenario() {
-        strategy.everythingIsHappeningAsISaid(creatures);
+    /**
+     *  Gets instance of existing House or creates new House - Singleton pattern
+     * @return instance of house
+     */
+    public static House getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new House();
+        }
+        return INSTANCE;
     }
 
-    //SETTERS
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
-    } //House.setStrategy(new NightStrategy()); House.strategyScenario();
 
 }

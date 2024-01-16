@@ -1,41 +1,42 @@
 package org.example.creature;
 
-import lombok.AllArgsConstructor;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.example.device.Device;
 import org.example.house.Room;
 
-@AllArgsConstructor
+/**
+ * Class representing Creature (living object) in the house
+ */
+@Getter
+@Setter
 public abstract class Creature {
 
-    String name;
-    String type;
+    protected Room currentRoom;
+    protected Device currentDevice;
+    protected CreaturesEnum creatureType;
+    protected String name;
 
-    double maxEnergy;
-    Room currentRoom;
+//    protected Creature(){
+//        EventManager.getInstance().subscibe(DAY, this);
+//    }
 
-    public abstract void makeSound();
-    //void setStrategy(); ????
-    public abstract void useDevice(Device device);
-    public abstract Room getRoom();
-    public abstract void sleep();
-    public abstract void eat();
-
-    //GETTERS AND SETTERS
-    public String getName() {
-        return name;
+    /**
+     * Creature go to another room
+     * @param room target room
+     */
+    public void goToAnotherRoom(Room room){
+        room.getCreaturesInside().remove(this);
+        room.getCreaturesInside().add(this);
+        currentRoom = room;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public abstract void interactWithDevice(Device device);
 
-    public double getMaxEnergy() {
-        return maxEnergy;
-    }
 
-    public void setMaxEnergy(double maxEnergy) {
-        this.maxEnergy = maxEnergy;
-    }
+    public void breakDevice(){}
 
-    //***************************
+
+
 }

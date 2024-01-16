@@ -10,6 +10,5 @@ public class NightStrategy implements Strategy {
         for (Creature creature : creatures) {
             creature.sleep();
         }
-        System.out.println("EVERYBODY IS SLEEPING");
     }
 }

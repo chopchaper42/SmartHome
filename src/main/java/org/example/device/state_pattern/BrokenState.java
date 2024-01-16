@@ -1,16 +1,24 @@
 package org.example.device.state_pattern;
 
+import org.example.creature.Creature;
+import org.example.creature.people.Person;
 import org.example.device.Device;
 
-public class BrokenState extends DeviceState{
-    public BrokenState(Device device) {
-        super(device);
+public class BrokenState implements DeviceState{
+
+
+    @Override
+    public boolean turnOn(Person person) {
+        return false;
     }
 
     @Override
-    public String onOffOn() {
-        //???
+    public boolean turnOff(Person person) {
+        return false;
     }
 
-
+    @Override
+    public boolean interact(Creature creature) {
+        return false;
+    }
 }

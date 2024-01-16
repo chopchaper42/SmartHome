@@ -1,22 +1,24 @@
 package org.example.device.state_pattern;
 
+import org.example.creature.Creature;
+import org.example.creature.people.Person;
 import org.example.device.Device;
 
-public class OffState extends DeviceState{
-    public OffState(Device device) {
-        super(device);
+public class OffState implements DeviceState{
+
+
+    @Override
+    public boolean turnOn(Person person) {
+        return false;
     }
 
     @Override
-    public String onOffOn() {
-        device.setStateOfDevice(new OnState(device));
-        return device.turnOn();
+    public boolean turnOff(Person person) {
+        return false;
     }
 
     @Override
-    public void usingElectricity() {
-
+    public boolean interact(Creature creature) {
+        return false;
     }
-
-
 }
