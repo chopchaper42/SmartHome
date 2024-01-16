@@ -5,5 +5,5 @@ import org.example.creature.CreaturesEnum;
 import org.example.house.Room;
 
 public abstract class AbstractCreatureFactory<T> {
-    public abstract Creature createCreature(Room currentRoom, T creatureType);
+    public abstract Creature createCreature(String name, int age, Room currentRoom, T creatureType);
 }

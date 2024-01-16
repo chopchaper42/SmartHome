@@ -17,6 +17,8 @@ public abstract class Creature {
     protected Device currentDevice;
     protected CreaturesEnum creatureType;
     protected String name;
+    protected int age;
+
 
 //    protected Creature(){
 //        EventManager.getInstance().subscibe(DAY, this);

@@ -32,7 +32,7 @@ public class PetFactory extends AbstractCreatureFactory<AnimalTypes>{
 
     private final List<Animal> animals = new ArrayList<>();
     @Override
-    public Creature createCreature(Room currentRoom, AnimalTypes creatureType) {
+    public Creature createCreature(String name, int age, Room currentRoom, AnimalTypes creatureType) {
         Animal animal = switch (creatureType) {
             case CAT -> new Cat();
         };

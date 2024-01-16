@@ -32,7 +32,7 @@ public class PeopleFactory extends AbstractCreatureFactory<HumanTypes>{
 
     private final List<Person> people = new ArrayList<>();
     @Override
-    public Creature createCreature(Room currentRoom, HumanTypes creatureType) {
+    public Creature createCreature(String name, int age, Room currentRoom, HumanTypes creatureType) {
         Person person = switch (creatureType) {
             case ADULT -> new Adult();
             case CHILD -> new Child();

@@ -37,5 +37,12 @@ public class House {
         return INSTANCE;
     }
 
+    /**
+     * Adds floor to the floor list of house
+     * @param floor floor to add
+     */
+    public void addFloor(Floor floor) {
+        floors.add(floor);
+    }
 
 }

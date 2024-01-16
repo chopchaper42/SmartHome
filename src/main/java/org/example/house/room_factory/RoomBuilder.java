@@ -1,5 +1,7 @@
 package org.example.house.room_factory;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.example.device.Device;
 import org.example.device.devices.construction.AutomaticDoor;
 import org.example.device.devices.construction.AutomaticWindow;
@@ -10,15 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class for building rooms
+ * Class for building rooms (with devices/windows and doors inside)
  */
+@Getter
+@Setter
 public class RoomBuilder {
 
 
     private final List<Device> devices = new ArrayList<>();
     private final List<AutomaticWindow> windowList = new ArrayList<>();
     private final List<AutomaticDoor> doorList = new ArrayList<>();
-    RoomFactory roomFactory = new RoomFactory();
+    RoomFactory roomFactory = RoomFactory.getInstance();
     RoomTypes roomName;
 
     /**
