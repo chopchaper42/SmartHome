@@ -8,16 +8,27 @@ import org.example.device.device_factory.EntertainmentDeviceCreator;
 import org.example.device.device_factory.SportDeviceCreator;
 import org.example.device.devices.entertainment.EntertainmentDeviceInterface;
 import org.example.device.devices.sport.SportDeviceInterface;
+import org.example.events.Event;
+import org.example.events.EventType;
+import org.example.events.creatures_events.AskingForFood;
 import org.example.events.creatures_events.Eating;
 import org.example.events.creatures_events.Relaxing;
 import org.example.events.creatures_events.Sporting;
+import org.example.events.observer.EventManager;
 import org.example.house.House;
 import org.example.house.Room;
+import org.example.house.strategy.HungryStrategy;
+import org.example.house.strategy.RelaxingStrategy;
+import org.example.house.strategy.SportStrategy;
+import org.example.house.strategy.Strategy;
 
 
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
+
+import static org.example.events.EventType.NIGHT;
+import static org.example.events.EventType.PET_WANT_TO_EAT;
 
 @Getter
 @Setter
@@ -25,10 +36,11 @@ public abstract class Person extends Creature {
     protected House house = House.getInstance();
     private static final Logger logger = Logger.getLogger(Person.class.getName());
 
-//    protected Person() {
-//        super();
-//        EventManager.getInstance().subscribe(NIGHT, this);
-//    }
+    protected Person() {
+        super();
+        EventManager.getInstance().subscribe(PET_WANT_TO_EAT, this);
+        EventManager.getInstance().subscribe(NIGHT, this);
+    }
 
     /**
      * Person interacts with device
@@ -63,9 +75,8 @@ public abstract class Person extends Creature {
      * Randomly selects an entertainment device from the available list, initiates the relaxation event,
      * and interacts with the selected device in the room.
      *
-     * @param currentRoom The room where the relaxation is initiated.
      */
-    public void relax(Room currentRoom){
+    public void relax(){
         List<EntertainmentDeviceInterface> entertainmentDeviceInterfaceList = EntertainmentDeviceCreator.getInstance().getEntertainmentDeviceInterfaceList();
         if (entertainmentDeviceInterfaceList.isEmpty()) {
             logger.warning("No entertainment devices found");
@@ -87,9 +98,8 @@ public abstract class Person extends Creature {
      * Randomly selects a sport device from the available list, initiates the sporting event,
      * and interacts with the selected sport device in the room.
      *
-     * @param currentRoom The room where the sporting activity is initiated.
      */
-    public void sport(Room currentRoom){
+    public void sport(){
         List<SportDeviceInterface> sportDeviceInterfaceList = SportDeviceCreator.getInstance().getSportDeviceInterfaceList();
         if (sportDeviceInterfaceList.isEmpty()) {
             logger.warning("No entertainment devices found");
@@ -145,4 +155,31 @@ public abstract class Person extends Creature {
         freeDevice();
     }
 
+    @Override
+    public void update(Event event){
+        if(event.getEventType() == EventType.PET_WANT_TO_EAT) {
+            AskingForFood askingForFood = (AskingForFood) event;
+            goToAnotherRoom(askingForFood.getAnimal().getCurrentRoom());
+        }
+    }
+
+    @Override
+    public void startingNewDay() {
+        List<String> personStrategies = House.getInstance().getPersonStrategies();
+        if (!personStrategies.isEmpty()) {
+            Random random = new Random();
+            int randomIndex = random.nextInt(personStrategies.size());
+            String randomStrategyName = personStrategies.get(randomIndex);
+            switch (randomStrategyName) {
+                case "SportStrategy" :
+                    this.strategy = new SportStrategy(); break;
+                case "Hungry" :
+                      this.strategy = new HungryStrategy(); break;
+                case "RelaxingStrategy" :
+                    this.strategy = new RelaxingStrategy(); break;
+                default : break;
+            }
+            logger.info(name + " is treating by strategy " + randomStrategyName);
+        }
+    }
 }

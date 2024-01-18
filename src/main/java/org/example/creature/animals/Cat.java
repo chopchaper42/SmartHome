@@ -10,13 +10,4 @@ public class Cat extends Animal {
         super();
     }
 
-    @Override
-    public void update(Event event) {
-
-    }
-
-    @Override
-    public void startingNewDay() {
-
-    }
 }

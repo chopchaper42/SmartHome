@@ -42,8 +42,6 @@ public class EntertainmentDeviceCreator extends DeviceFactory<EntertainmentDevic
     public Device createDevice(Room room, EntertainmentDeviceTypes concreteDevice){
             Device device = switch (concreteDevice) {
                 case TV -> new TV(room);
-                case MOBILE -> new Mobile(room);
-                case SMART_WATCH -> new SmartWatch(room);
                 case CD_PLAYER -> new CdPlayer(room);
                 case COMPUTER -> new Computer(room);
                 default -> throw new IllegalArgumentException("Unknown Construction Device Type");

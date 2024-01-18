@@ -10,5 +10,7 @@ public enum EventType {
     TURNING_ON_THE_DEVICE,
     REPAIRING_DEVICE,
     DAY,
-    NIGHT
+    NIGHT,
+    BITING,
+    PET_WANT_TO_EAT
 }

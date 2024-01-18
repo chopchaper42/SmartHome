@@ -42,7 +42,7 @@ public class UsingState implements DeviceState{
     public boolean turnOff(Person person) {
         new TurningOffTheDevice(person, device);
         device.setStateOfDevice(new OffState(device));
-        //device.getCounter().increment(device.getConsumption());
+        device.getElectricityRecord().growElectricity(device.getElectricity());
         return true;
     }
 

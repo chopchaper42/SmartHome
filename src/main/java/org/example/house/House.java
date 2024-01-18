@@ -48,12 +48,14 @@ public class House {
     public static House getInstance() {
         return INSTANCE;
     }
-    //??
+
     private static void fullCreatureStrategies() {
         personStrategies = new ArrayList<>();
         animalStrategies = new ArrayList<>();
         personStrategies.add("Hungry");
-        animalStrategies.add("Chilling");
+        personStrategies.add("Sporting");
+        personStrategies.add("Relaxing");
+        animalStrategies.add("Pet");
     }
 
     /**
@@ -64,6 +66,13 @@ public class House {
         floors.add(floor);
     }
 
-    //public List<Device> getSportDevices() {return }
+    public List<String> getPersonStrategies() {
+        return personStrategies;
+    }
+
+    public List<String> getAnimalStrategies(){
+        return animalStrategies;
+    }
+
 
 }

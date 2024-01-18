@@ -23,25 +23,19 @@ public class Adult extends Person {
     public Adult() {
         super();
         EventManager.getInstance().subscribe(BREAKING_DEVICE, this);
-        //EventManager.getInstance().subscribe(NO_FOOD, this);
     }
 
     @Override
     public void update(Event event) {
-        //super.update(event);
         if (event.getEventType() == BREAKING_DEVICE) {
             BreakingDevice device = (BreakingDevice) event;
             logger.info("The person " + getName() + " started repairing device " + device.getDevice().getNameOfDevice());
             isAdultLookingForManual = true;
             brokenDevice = device.getDevice();
-            //eventForBrokenDevice = device;
+
         }
     }
 
-    @Override
-    public void startingNewDay() {
-
-    }
 
     /**
      * Implements the behavior for handling events in the context of an Adult person.

@@ -3,9 +3,12 @@ package org.example.creature;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.creature.people.Person;
 import org.example.device.Device;
 import org.example.device.DeviceTypes;
+import org.example.events.Event;
 import org.example.events.EventType;
+import org.example.events.observer.EventManager;
 import org.example.events.observer.EventObserver;
 import org.example.house.House;
 import org.example.house.Room;
@@ -13,7 +16,11 @@ import org.example.house.floors.Floor;
 import org.example.house.strategy.Strategy;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
+import java.util.logging.Logger;
+
+import static org.example.events.EventType.DAY;
 
 /**
  * Class representing Creature (living object) in the house
@@ -21,6 +28,7 @@ import java.util.Random;
 @Getter
 @Setter
 public abstract class Creature implements EventObserver {
+    private static final Logger logger = Logger.getLogger(Creature.class.getName());
 
     protected Room currentRoom;
     protected Device currentDevice;
@@ -30,18 +38,49 @@ public abstract class Creature implements EventObserver {
     protected DeviceTypes deviceType;
     protected Strategy strategy;
 
-//    protected Creature() {
-//        EventManager.getInstance.subscribe(DAY, this);
-//    }
+    protected Creature() {
+        EventManager.getInstance().subscribe(DAY, this);
+    }
 
+    /**
+     * Moves the person to another room by name.
+     *
+     * @param nameOfRoom The name of the target room.
+     */
+    public void goToAnotherRoomByName(String nameOfRoom) {
+        Room startingRoom = currentRoom;
+        String nameOfStaringRoom = startingRoom.getRoomName();
+        Room targetRoom;
+        if(Objects.equals(nameOfRoom, " ")) {
+            targetRoom = randomRoom();
+            nameOfRoom = targetRoom.getRoomName();
+        } else {
+            targetRoom = findRoom(nameOfRoom);
+        }
+        if(Objects.equals(nameOfStaringRoom, nameOfRoom)) {
+            logger.info(getName() + " stays in " + nameOfRoom);
+        }
+        if (targetRoom == null) {
+            logger.warning("Room with name " + nameOfRoom + " not found.");
+        } else {
+            this.currentRoom = targetRoom;
+            logger.info(getName() + " goes to the room " + targetRoom.getRoomName());
+        }
+    }
     /**
      * Creature go to another room
      * @param room target room
      */
     public void goToAnotherRoom(Room room){
-        room.getCreaturesInside().remove(this);
-        room.getCreaturesInside().add(this);
-        currentRoom = room;
+        if (currentRoom == room) {
+            logger.info(name + " is in the room " + currentRoom.getRoomName());
+        }
+        else {
+            room.getCreaturesInside().remove(this);
+            room.getCreaturesInside().add(this);
+            this.currentRoom = room;
+            logger.info(name + " goes to the room " + room.getRoomName());
+        }
     }
 
     public abstract void interactWithDevice(Device device);
@@ -124,6 +163,9 @@ public abstract class Creature implements EventObserver {
         return rooms.get(roomIndex);
     }
 
+    @Override
+    public void update (Event event) {
 
+    }
 
 }

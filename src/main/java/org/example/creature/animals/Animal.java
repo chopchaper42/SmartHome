@@ -4,7 +4,10 @@ import org.example.creature.Creature;
 import org.example.creature.people.Person;
 import org.example.device.Device;
 import org.example.device.state_pattern.BrokenState;
+import org.example.events.creatures_events.Biting;
+import org.example.house.House;
 import org.example.house.Room;
+import org.example.house.strategy.PetStrategy;
 
 import java.util.List;
 import java.util.Random;
@@ -43,8 +46,19 @@ public abstract class Animal extends Creature {
         device.interact(this);
     }
 
-    //@Override
     public void stopInteract(){
+        logger.info("The animal stopped interacting with the device. ");
         freeDevice();
+    }
+
+    public void bitePerson(Person person) {
+        goToAnotherRoom(person.getCurrentRoom());
+        new Biting(this, person);
+    }
+
+    @Override
+    public void startingNewDay() {
+        strategy = new PetStrategy();
+        logger.info("The animal " + getName() + " is treating by pet strategy. ");
     }
 }
