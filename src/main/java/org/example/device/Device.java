@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.creature.Creature;
 import org.example.creature.people.Person;
+import org.example.device.electricity.Electricity;
+import org.example.device.electricity.ElectricityRecord;
 import org.example.device.state_pattern.DeviceState;
 import org.example.house.Room;
 
@@ -11,27 +13,23 @@ import org.example.house.Room;
 @Getter
 public abstract class Device {
 
-    //private final DeviceTypes type;
     private Room currentRoom;
-    private boolean isFree = true;
+    protected boolean isFree = true;
+    protected String nameOfDevice;
 
-    //electricity wasting
-    private final int onElectricityWasting;
-    private final int offElectricityWasting;
+    protected  int onElectricityWasting;
+    protected int offElectricityWasting;
 
-    private final int brokenElectricityWasting;
-    //**************************************
+    protected  int brokenElectricityWasting;
 
-    //State pattern
-    private DeviceState stateOfDevice;
-    //*******************************
+    protected DeviceState stateOfDevice;
+    protected Electricity electricity;
+    protected ElectricityRecord electricityRecord;
 
-    protected Device(Room currentRoom, int onElectricityWasting, int offElectricityWasting, int brokenElectricityWasting) {
+    public Device(Room currentRoom) {
         this.currentRoom = currentRoom;
-        this.onElectricityWasting = onElectricityWasting;
-        this.offElectricityWasting = offElectricityWasting;
-        this.brokenElectricityWasting = brokenElectricityWasting;
     }
+
 
     /**
      *  If device is off, state is changing to on
@@ -59,4 +57,11 @@ public abstract class Device {
     public boolean interact(Creature creature) {
         return stateOfDevice.interact(creature);
     }
+
+    /**
+     * Breaking device, state changes to BrokenState
+     * @param creature creature who breaks the device
+     * @return false if already broken, true if broken now
+     */
+    public boolean breakDevice(Creature creature) { return stateOfDevice.breakDevice(creature);}
 }

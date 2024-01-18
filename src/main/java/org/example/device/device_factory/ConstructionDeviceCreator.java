@@ -5,11 +5,16 @@ import org.example.device.Device;
 import org.example.device.DeviceTypes;
 import org.example.device.devices.construction.AutomaticDoor;
 import org.example.device.devices.construction.AutomaticWindow;
+import org.example.device.devices.construction.ConstructionDeviceInterface;
 import org.example.house.Room;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ConstructionDeviceCreator extends DeviceFactory<ConstructionDeviceTypes>{
     private static ConstructionDeviceCreator instance = null;
+    private final List<ConstructionDeviceInterface> construction_devices = new ArrayList<>();
 
     /**
      * Private singleton constructor
@@ -34,5 +39,9 @@ public class ConstructionDeviceCreator extends DeviceFactory<ConstructionDeviceT
                 default -> throw new IllegalArgumentException("Unknown Construction Device Type");
         };
         return device;
+    }
+
+    public List<ConstructionDeviceInterface> getDevices(){
+        return construction_devices;
     }
 }

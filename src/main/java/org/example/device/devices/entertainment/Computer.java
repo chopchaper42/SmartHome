@@ -1,15 +1,23 @@
 package org.example.device.devices.entertainment;
 
 import org.example.device.Device;
+import org.example.device.electricity.Electricity;
+import org.example.device.electricity.ElectricityRecord;
+import org.example.device.state_pattern.OffState;
 import org.example.house.Room;
 
-public class Computer extends Device {
-    //electricity wasting
-    private static final int onElectricityWasting = 8;
-    private static final int offElectricityWasting = 15;
-    private static final int brokenElectricityWasting = 1;
-    //****************************
-    public Computer(Room room) {
-        super(room, onElectricityWasting, offElectricityWasting, brokenElectricityWasting);
+/**
+ * Computer class - entertainment device
+ */
+public class Computer extends Device implements EntertainmentDeviceInterface{
+
+    public Computer(Room currentRoom) {
+        super(currentRoom);
+        nameOfDevice = "Computer";
+        electricity = new Electricity(20);
+        electricityRecord = new ElectricityRecord();
+        stateOfDevice = new OffState(this);
     }
+
+
 }

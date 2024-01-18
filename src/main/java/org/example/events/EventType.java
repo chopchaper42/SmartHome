@@ -8,6 +8,5 @@ public enum EventType {
     BREAKING_DEVICE,
     TURNING_OFF_THE_DEVICE,
     TURNING_ON_THE_DEVICE,
-
     REPAIRING_DEVICE
 }

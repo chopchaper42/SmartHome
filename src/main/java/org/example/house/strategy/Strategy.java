@@ -5,5 +5,10 @@ import org.example.creature.Creature;
 import java.util.List;
 
 public interface Strategy {
-    void everythingIsHappeningAsISaid(List<Creature> creatures);
+
+    /**
+     * Follows the strategy.
+     * @param creature
+     */
+    void everythingIsHappeningAsISaid(Creature creature);
 }

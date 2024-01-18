@@ -12,9 +12,17 @@ import static org.example.device.DeviceTypes.CONSTRUCTION_DEVICE;
 import static org.example.device.DeviceTypes.ENTERTAINMENT_DEVICE;
 import org.example.device.EntertainmentDeviceTypes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EntertainmentDeviceCreator extends DeviceFactory<EntertainmentDeviceTypes>{
 
     private static EntertainmentDeviceCreator instance = null;
+
+    /**
+     * List of all entertainment devices
+     */
+    private final List<EntertainmentDeviceInterface> entertainmentDeviceInterfaceList = new ArrayList<>();
 
     /**
      * Private singleton constructor
@@ -40,6 +48,17 @@ public class EntertainmentDeviceCreator extends DeviceFactory<EntertainmentDevic
                 case COMPUTER -> new Computer(room);
                 default -> throw new IllegalArgumentException("Unknown Construction Device Type");
             };
+            //add to room
+            //add to list of all devices
+            entertainmentDeviceInterfaceList.add((EntertainmentDeviceInterface) device);
         return device;
+    }
+
+    /**
+     * Returns list of all entertainment devices
+     * @return
+     */
+    public List<EntertainmentDeviceInterface> getEntertainmentDeviceInterfaceList() {
+        return entertainmentDeviceInterfaceList;
     }
 }

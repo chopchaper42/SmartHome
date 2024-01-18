@@ -6,8 +6,9 @@ import java.util.List;
 
 public class DayStrategy implements Strategy{
 
+
     @Override
-    public void everythingIsHappeningAsISaid(List<Creature> creatures) {
+    public void everythingIsHappeningAsISaid(Creature creature) {
 
     }
 }

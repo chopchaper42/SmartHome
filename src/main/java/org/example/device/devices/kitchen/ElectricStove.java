@@ -1,16 +1,23 @@
 package org.example.device.devices.kitchen;
 
 import org.example.device.Device;
+import org.example.device.electricity.Electricity;
+import org.example.device.electricity.ElectricityRecord;
+import org.example.device.state_pattern.OffState;
 import org.example.house.Room;
 
+/**
+ * ElectricStove class - kitchen device
+ */
 public class ElectricStove extends Device {
 
-    //electricity wasting
-    private static final int onElectricityWasting = 25;
-    private static final int offElectricityWasting = 50;
-    private static final int brokenElectricityWasting = 10;
-    //****************************
-    public ElectricStove(Room room) {
-        super(room, onElectricityWasting, offElectricityWasting, brokenElectricityWasting);
+    public ElectricStove(Room currentRoom) {
+        super(currentRoom);
+        nameOfDevice = "ElectricStove";
+        electricity = new Electricity(31);
+        electricityRecord = new ElectricityRecord();
+        stateOfDevice = new OffState(this);
     }
+
+
 }

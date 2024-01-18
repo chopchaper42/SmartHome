@@ -1,45 +1,22 @@
 package org.example.device.devices.construction;
 
 import org.example.device.Device;
+import org.example.device.electricity.Electricity;
+import org.example.device.electricity.ElectricityRecord;
+import org.example.device.state_pattern.OffState;
 import org.example.house.Room;
 
-public class AutomaticDoor extends Device {
+/**
+ * AutomaticDoor class - construction device
+ */
+public class AutomaticDoor extends Device implements ConstructionDeviceInterface {
 
-    //electricity wasting
-    private static final int onElectricityWasting = 2;
-    private static final int brokenElectricityWasting = 5;
-    private static final int offElectricityWasting = 1;
-
-    //*************
-    private boolean opened;
-    private boolean locked;
-
-    public boolean isOpened() {
-        return opened;
+    public AutomaticDoor(Room currentRoom) {
+        super(currentRoom);
+        nameOfDevice = "AutomaticDoor";
+        electricity = new Electricity(3);
+        electricityRecord = new ElectricityRecord();
+        stateOfDevice = new OffState(this);
     }
 
-    public boolean isLocked() {
-        return opened;
-    }
-
-    //do later
-    public void open() {
-
-    }
-
-    public void close() {
-
-    }
-
-    public void lock() {
-
-    }
-
-    public void unlock() {
-
-    }
-
-    public AutomaticDoor(Room room) {
-        super(room, onElectricityWasting, offElectricityWasting, brokenElectricityWasting);
-    }
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.creature.Creature;
+import org.example.device.Device;
 import org.example.house.floors.Floor;
 import org.example.report.Report;
 
@@ -18,7 +19,6 @@ import java.util.List;
 @Getter
 @Setter
 public class House {
-    private HouseControlSystem controlSystem;
     public List<Creature> creatures;
     private List<Floor> floors;
     private Report reporter;
@@ -44,5 +44,7 @@ public class House {
     public void addFloor(Floor floor) {
         floors.add(floor);
     }
+
+    //public List<Device> getSportDevices() {return }
 
 }

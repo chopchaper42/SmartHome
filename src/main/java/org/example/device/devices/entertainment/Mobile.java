@@ -1,18 +1,24 @@
 package org.example.device.devices.entertainment;
 
 import org.example.device.Device;
+import org.example.device.electricity.Electricity;
+import org.example.device.electricity.ElectricityRecord;
+import org.example.device.state_pattern.OffState;
 import org.example.house.Room;
 
-public class Mobile extends Device {
+/**
+ * Mobile class - entertainment device
+ */
+public class Mobile extends Device implements EntertainmentDeviceInterface{
 
-    //electricity wasting
-    //CHANGE LATER TO A BATTERY, NOT ELECTRICITY
-    private static final int onElectricityWasting = 10;
-    private static final int offElectricityWasting = 20;
-    private static final int brokenElectricityWasting = 5;
-    //****************************
-    public Mobile(Room room) {
-        super(room, onElectricityWasting, offElectricityWasting, brokenElectricityWasting);
+    public Mobile(Room currentRoom) {
+        super(currentRoom);
+        nameOfDevice = "Mobile";
+        electricity = new Electricity(15);
+        electricityRecord = new ElectricityRecord();
+        stateOfDevice = new OffState(this);
     }
+
+
 
 }
