@@ -1,70 +1,71 @@
 {
-  "home": [
-{
-  "daysCount" : 20,
-  "floors" : [{
-    "level" : 1,
-    "rooms" : [
+  "home": {
+    "daysCount": 20,
+    "floors": [
       {
-        "name": "Hallway",
-        "devices": [
+        "level": 1,
+        "rooms": [
           {
-            "sport_devices": [],
-            "entertainment_devices": [],
-            "kitchen_devices": [
+            "name": "Hallway",
+            "devices": [
               {
-                "type": "TEAPOD"
+                "device_type": "kitchen_devices",
+                "concrete_type": "TEAPOD"
+              }
+            ]
+          },
+          {
+            "name": "LivingRoom",
+            "devices": [
+              {
+                "device_type": "entertainment_devices",
+                "concrete_type": "TV"
+              },
+              {
+                "device_type": "entertainment_devices",
+                "concrete_type": "GameConsole"
               }
             ]
           }
         ]
+      }
+    ]
   },
-
-
-  "creatures": [
-    {
-      "animals": [
-        {
-          "cats": [
-            {
-              "name": "Fluffy",
-              "age": 2,
-              "floorNum" : 1,
-              "room": "Kitchen"
-            }
-          ]
-        }
-      ],
-      "people": [
-        {
-          "adults": [
-            {
-              "name": "Dad",
-              "age": 40,
-              "room": "Kitchen"
-            },
-            {
-              "name": "Mom",
-              "age": 35,
-              "room": "Kitchen"
-            }
-          ]
-        },
-        {
-          "children": [
-            {
-              "name": "Pepa",
-              "age": 14,
-              "room": "LivingRoom"
-            },
-            {
-              "name": "George",
-              "age": 9,
-              "room": "LivingRoom"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  "creatures": {
+    "animals": [
+      {
+        "type": "cats",
+        "name": "Fluffy",
+        "age": 2,
+        "number_of_floor": 1,
+        "name_of_room": "Kitchen"
+      }
+    ],
+    "people": [
+      {
+        "type": "adults",
+        "name": "Dad",
+        "age": 40,
+        "room": "Kitchen"
+      },
+      {
+        "type": "adults",
+        "name": "Mom",
+        "age": 35,
+        "room": "Kitchen"
+      },
+      {
+        "type": "children",
+        "name": "Pepa",
+        "age": 14,
+        "room": "LivingRoom"
+      },
+      {
+        "type": "children",
+        "name": "George",
+        "age": 9,
+        "room": "LivingRoom"
+      }
+    ]
+  }
 }

@@ -4,7 +4,7 @@ public class ActivityAndUsageReport implements Report{
 
     private static ActivityAndUsageReport instance;
     @Override
-    public void generateReport() {
+    public void generateReport(String filename) {
 
     }
 

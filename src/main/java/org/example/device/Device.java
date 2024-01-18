@@ -64,4 +64,11 @@ public abstract class Device {
      * @return false if already broken, true if broken now
      */
     public boolean breakDevice(Creature creature) { return stateOfDevice.breakDevice(creature);}
+
+    public boolean repair(Person person) {
+        if (stateOfDevice.repairDevice(person)){
+            return true;
+        }
+        return false;
+    }
 }

@@ -6,9 +6,11 @@ import lombok.Setter;
 import org.example.device.Device;
 import org.example.device.DeviceTypes;
 import org.example.events.EventType;
+import org.example.events.observer.EventObserver;
 import org.example.house.House;
 import org.example.house.Room;
 import org.example.house.floors.Floor;
+import org.example.house.strategy.Strategy;
 
 import java.util.List;
 import java.util.Random;
@@ -18,15 +20,15 @@ import java.util.Random;
  */
 @Getter
 @Setter
-public abstract class Creature {
+public abstract class Creature implements EventObserver {
 
     protected Room currentRoom;
     protected Device currentDevice;
     protected CreaturesEnum creatureType;
     protected String name;
     protected int age;
-
     protected DeviceTypes deviceType;
+    protected Strategy strategy;
 
 //    protected Creature() {
 //        EventManager.getInstance.subscribe(DAY, this);
@@ -62,7 +64,7 @@ public abstract class Creature {
     //public abstract void stopIteract();
 
     //public void creatureDoStrategy() { strategy.doStuff(this); }
-
+    public void everythingIsHappeningAsISaid() { strategy.everythingIsHappeningAsISaid(this);}
     /**
      * Creature stops using device
      */

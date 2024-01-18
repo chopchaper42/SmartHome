@@ -9,6 +9,7 @@ import org.example.device.Device;
 import org.example.house.floors.Floor;
 import org.example.report.Report;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +20,14 @@ import java.util.List;
 @Getter
 @Setter
 public class House {
+    private int days;
     public List<Creature> creatures;
     private List<Floor> floors;
     private Report reporter;
     private static House INSTANCE;
+
+    private static List<String> personStrategies;
+    private static List<String> animalStrategies;
 
     public House() {}
 
@@ -30,11 +35,25 @@ public class House {
      *  Gets instance of existing House or creates new House - Singleton pattern
      * @return instance of house
      */
-    public static House getInstance() {
+    public static House getInstance(String filename) {
         if (INSTANCE == null) {
-            INSTANCE = new House();
+            House house = new House();
+            house.floors = new ArrayList<>();
+            house.creatures = new ArrayList<>();
+            fullCreatureStrategies();
         }
         return INSTANCE;
+    }
+
+    public static House getInstance() {
+        return INSTANCE;
+    }
+    //??
+    private static void fullCreatureStrategies() {
+        personStrategies = new ArrayList<>();
+        animalStrategies = new ArrayList<>();
+        personStrategies.add("Hungry");
+        animalStrategies.add("Chilling");
     }
 
     /**
