@@ -1,71 +1,79 @@
 {
-  "home": {
-    "daysCount": 20,
-    "floors": [
-      {
-        "level": 1,
-        "rooms": [
-          {
-            "name": "Hallway",
-            "devices": [
-              {
-                "device_type": "kitchen_devices",
-                "concrete_type": "TEAPOD"
-              }
-            ]
-          },
-          {
-            "name": "LivingRoom",
-            "devices": [
-              {
-                "device_type": "entertainment_devices",
-                "concrete_type": "TV"
-              },
-              {
-                "device_type": "entertainment_devices",
-                "concrete_type": "GameConsole"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "creatures": {
-    "animals": [
-      {
-        "type": "cats",
-        "name": "Fluffy",
-        "age": 2,
-        "number_of_floor": 1,
-        "name_of_room": "Kitchen"
-      }
-    ],
-    "people": [
-      {
-        "type": "adults",
-        "name": "Dad",
-        "age": 40,
-        "room": "Kitchen"
-      },
-      {
-        "type": "adults",
-        "name": "Mom",
-        "age": 35,
-        "room": "Kitchen"
-      },
-      {
-        "type": "children",
-        "name": "Pepa",
-        "age": 14,
-        "room": "LivingRoom"
-      },
-      {
-        "type": "children",
-        "name": "George",
-        "age": 9,
-        "room": "LivingRoom"
-      }
-    ]
-  }
+  "days" : 10,
+  "floors": [
+    {
+      "level": 1,
+      "rooms": [
+        {
+          "name": "Kitchen",
+          "devices": [
+            {
+              "device_type": "KITCHEN_DEVICE",
+              "concrete_device": "TEAPOD"
+            },
+            {
+              "device_type": "KITCHEN_DEVICE",
+              "concrete_device": "FRIDGE"
+            }
+          ]
+        },
+        {
+          "name": "Bedroom",
+          "devices": [
+            {
+              "device_type": "ENTERTAINMENT_DEVICE",
+              "concrete_device": "TV"
+            },
+            {
+              "device_type": "ENTERTAINMENT_DEVICE",
+              "concrete_device": "COMPUTER"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "creatures": [
+    {
+      "animals": [
+        {
+          "type": "cats",
+          "name": "Fluffy",
+          "age": 2,
+          "number_of_floor": 1,
+          "room": "Bedroom"
+        }
+      ],
+      "people": [
+        {
+          "type": "ADULT",
+          "name": "Dad",
+          "age": 40,
+          "number_of_floor": 1,
+          "room": "Kitchen"
+        },
+        {
+          "type": "ADULT",
+          "name": "Mom",
+          "age": 35,
+          "number_of_floor": 1,
+          "room": "Kitchen"
+        },
+        {
+          "type": "CHILDREN",
+          "name": "Pepa",
+          "age": 14,
+          "number_of_floor": 1,
+          "room": "Kitchen"
+        },
+        {
+          "type": "CHILDREN",
+          "name": "George",
+          "age": 9,
+          "number_of_floor": 1,
+          "room": "Kitchen"
+        }
+      ]
+    }
+  ]
 }

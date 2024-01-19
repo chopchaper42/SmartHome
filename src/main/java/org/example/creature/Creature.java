@@ -100,9 +100,7 @@ public abstract class Creature implements EventObserver {
         }
     }
 
-    //public abstract void stopIteract();
 
-    //public void creatureDoStrategy() { strategy.doStuff(this); }
     public void everythingIsHappeningAsISaid() { strategy.everythingIsHappeningAsISaid(this);}
     /**
      * Creature stops using device

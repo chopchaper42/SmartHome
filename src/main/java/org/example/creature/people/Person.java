@@ -80,17 +80,20 @@ public abstract class Person extends Creature {
         List<EntertainmentDeviceInterface> entertainmentDeviceInterfaceList = EntertainmentDeviceCreator.getInstance().getEntertainmentDeviceInterfaceList();
         if (entertainmentDeviceInterfaceList.isEmpty()) {
             logger.warning("No entertainment devices found");
+            return;
         }
         new Relaxing(this);
         Random random = new Random();
         int deviceIndex = random.nextInt(entertainmentDeviceInterfaceList.size());
         EntertainmentDeviceInterface entertainmentDevice = entertainmentDeviceInterfaceList.get(deviceIndex);
         Device entertainmentDeviceTurnedToDevice = (Device) entertainmentDevice;
-        String nameOfDevice = entertainmentDeviceTurnedToDevice.getNameOfDevice();
-        entertainmentDeviceTurnedToDevice = findDevice(nameOfDevice);
-        currentDevice = entertainmentDeviceTurnedToDevice;
-        currentDevice.setFree(false);
-        entertainmentDeviceTurnedToDevice.interact(this);
+        //String nameOfDevice = entertainmentDeviceTurnedToDevice.getNameOfDevice();
+        //entertainmentDeviceTurnedToDevice = findDevice(nameOfDevice);
+        goToAnotherRoom(entertainmentDeviceTurnedToDevice.getCurrentRoom());
+        if(entertainmentDeviceTurnedToDevice.interact(this)) {
+            currentDevice = entertainmentDeviceTurnedToDevice;
+            currentDevice.setFree(false);
+        }
     }
 
     /**
@@ -102,18 +105,22 @@ public abstract class Person extends Creature {
     public void sport(){
         List<SportDeviceInterface> sportDeviceInterfaceList = SportDeviceCreator.getInstance().getSportDeviceInterfaceList();
         if (sportDeviceInterfaceList.isEmpty()) {
-            logger.warning("No entertainment devices found");
+            logger.warning("No sport devices found");
+            return;
         }
         new Sporting(this);
         Random random = new Random();
         int deviceIndex = random.nextInt(sportDeviceInterfaceList.size());
         SportDeviceInterface sportDevice = sportDeviceInterfaceList.get(deviceIndex);
         Device sportDeviceTurnedToDevice = (Device) sportDevice;
-        String nameOfDevice = sportDeviceTurnedToDevice.getNameOfDevice();
-        sportDeviceTurnedToDevice = findDevice(nameOfDevice);
-        currentDevice = sportDeviceTurnedToDevice;
-        currentDevice.setFree(false);
-        sportDeviceTurnedToDevice.interact(this);
+        //String nameOfDevice = sportDeviceTurnedToDevice.getNameOfDevice();
+        //sportDeviceTurnedToDevice = findDevice(nameOfDevice);
+        goToAnotherRoom(sportDeviceTurnedToDevice.getCurrentRoom());
+        if(sportDeviceTurnedToDevice.interact(this)) {
+            currentDevice = sportDeviceTurnedToDevice;
+            currentDevice.setFree(false);
+        }
+
     }
 
 
@@ -175,9 +182,7 @@ public abstract class Person extends Creature {
                     this.strategy = new SportStrategy(); break;
                 case "Hungry" :
                       this.strategy = new HungryStrategy(); break;
-                case "RelaxingStrategy" :
-                    this.strategy = new RelaxingStrategy(); break;
-                default : break;
+                default : this.strategy = new RelaxingStrategy(); break;
             }
             logger.info(name + " is treating by strategy " + randomStrategyName);
         }

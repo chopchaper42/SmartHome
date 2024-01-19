@@ -15,4 +15,9 @@ public class Eating extends Event {
         this.eventType = eventType.EATING;
         logger.info(person.getName() + " is eating.");
     }
+
+    @Override
+    public String toString() {
+        return person.getName() + " eating.\n";
+    }
 }

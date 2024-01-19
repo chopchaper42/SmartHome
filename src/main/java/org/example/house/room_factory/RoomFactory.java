@@ -28,12 +28,12 @@ public class RoomFactory {
     }
 
     private final List<Room> rooms = new ArrayList<>();
-    public Room createRoom(RoomTypes roomName) {
+    public Room createRoom(String roomName) {
         Room room = switch (roomName) {
-            case BEDROOM -> new Room("Bedroom");
-            case KITCHEN -> new Room("Kitchen");
-            case BATHROOM -> new Room("Bathroom");
-            case CORRIDOR -> new Room("Corridor");
+            case "Bedroom" -> new Room("Bedroom");
+            case "Kitchen" -> new Room("Kitchen");
+            case "Bathroom" -> new Room("Bathroom");
+            case "Corridor" -> new Room("Corridor");
             default -> throw new IllegalArgumentException("Unknown Room Type");
         };
         rooms.add(room);

@@ -1,0 +1,172 @@
+Day started 
+
+Dad is relaxing.
+
+The device COMPUTER is using by Dad
+
+George is relaxing.
+
+The device COMPUTER is using by George
+
+The device TV is broken by Fluffy
+
+The device COMPUTER is turning off by George
+
+The device TV is repairing by Dad
+
+The device COMPUTER is broken by Fluffy
+
+Night started 
+
+The device TV is broken by Fluffy
+
+The device TV is repairing by Dad
+
+Day started 
+
+Pepa is relaxing.
+
+The device TV is using by Pepa
+
+George is relaxing.
+
+The device TV is turning off by Pepa
+
+The device TV is broken by Fluffy
+
+The device TV is repairing by Dad
+
+Night started 
+
+Day started 
+
+The device TV is broken by Fluffy
+
+Pepa is relaxing.
+
+George is relaxing.
+
+The device TV is repairing by Dad
+
+Dad is relaxing.
+
+Night started 
+
+The device TV is broken by Fluffy
+
+Day started 
+
+The device TV is repairing by Dad
+
+Pepa is relaxing.
+
+George is relaxing.
+
+The device TV is using by George
+
+Mom is relaxing.
+
+The device TV is turning off by George
+
+The device TV is broken by Fluffy
+
+The device TV is repairing by Dad
+
+Night started 
+
+The device TV is broken by Fluffy
+
+The device TV is repairing by Dad
+
+Day started 
+
+The device TV is broken by Fluffy
+
+George is relaxing.
+
+The device TV is repairing by Dad
+
+Mom is relaxing.
+
+Night started 
+
+Day started 
+
+Dad is relaxing.
+
+The device TV is using by Dad
+
+Mom is relaxing.
+
+Pepa is relaxing.
+
+The device TV is using by Pepa
+
+George is relaxing.
+
+The device TV is turning off by Dad
+
+Night started 
+
+Day started 
+
+Dad is relaxing.
+
+Mom is relaxing.
+
+Pepa is relaxing.
+
+The device TV is broken by Fluffy
+
+The device TV is repairing by Dad
+
+Night started 
+
+Day started 
+
+Mom is relaxing.
+
+George is relaxing.
+
+The device TV is broken by Fluffy
+
+The device TV is repairing by Dad
+
+Night started 
+
+Day started 
+
+Mom is relaxing.
+
+The device TV is using by Mom
+
+Pepa is relaxing.
+
+George is relaxing.
+
+The device TV is turning off by Mom
+
+The device TV is broken by Fluffy
+
+Night started 
+
+The device TV is repairing by Dad
+
+Day started 
+
+The device TV is broken by Fluffy
+
+George is relaxing.
+
+The device TV is repairing by Dad
+
+Dad is relaxing.
+
+Mom is relaxing.
+
+The device TV is broken by Fluffy
+
+Night started 
+
+The device TV is repairing by Dad
+

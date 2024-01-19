@@ -17,5 +17,10 @@ public class Night extends Event{
         logger.info(" Night started. ");
     }
 
+    @Override
+    public String toString() {
+        return "Night started \n";
+    }
+
 
 }

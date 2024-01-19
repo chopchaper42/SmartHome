@@ -19,4 +19,9 @@ public class ElectricityRecord {
     public void growElectricity(Electricity el){
         electricity += el.getElectricity();
     }
+
+    @Override
+    public String toString() {
+        return  "ELECTRICITY: " + electricity;
+    }
 }

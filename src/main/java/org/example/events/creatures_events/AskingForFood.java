@@ -24,4 +24,9 @@ import java.util.logging.Logger;
         EventManager.getInstance().notify(this);
         logger.info(animal.getName() + " asks for food.");
     }
+
+    @Override
+    public String toString() {
+        return animal.getName() + " is asking for food.\n";
+    }
 }

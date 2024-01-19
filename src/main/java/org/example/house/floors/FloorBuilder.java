@@ -21,7 +21,8 @@ public class FloorBuilder {
      * Adds room to the floor
      * @param room target room
      */
-    public void addRoom(Room room) {
+    public void addRoom(String name, Room room) {
+        room.setRoomName(name);
         rooms.add(room);
         room.setNumberOfFloor(level);
     }

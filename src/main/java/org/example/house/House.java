@@ -12,6 +12,7 @@ import org.example.report.Report;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Class representing House - Singleton pattern (Lazy initialization?)
@@ -21,8 +22,12 @@ import java.util.List;
 @Getter
 @Setter
 public class House {
+
+    private static final Logger logger = Logger.getLogger(House.class.getName());
     private int days;
+    public List<Device> devices;
     public List<Creature> creatures;
+
     private List<Floor> floors;
     private Report reporter;
     private static House INSTANCE;
@@ -39,11 +44,15 @@ public class House {
     public static House getInstance(String filename) {
         if (INSTANCE == null) {
             House house = new House();
+            INSTANCE = house;
             house.floors = new ArrayList<>();
             house.creatures = new ArrayList<>();
             fullCreatureStrategies();
             HouseConfigurationReader houseConfigurationReader = new HouseConfigurationReader();
-            houseConfigurationReader.loadJson();
+            if (houseConfigurationReader.loadJson(house, filename)) {
+                logger.info("The House was created.");
+            }
+
         }
         return INSTANCE;
     }
@@ -76,6 +85,8 @@ public class House {
     public List<String> getAnimalStrategies(){
         return animalStrategies;
     }
+
+    public void addCreatures(Creature creature){ creatures.add(creature); }
 
 
 }

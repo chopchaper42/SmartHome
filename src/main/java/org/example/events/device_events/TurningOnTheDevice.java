@@ -20,4 +20,9 @@ public class TurningOnTheDevice extends Event {
         this.eventType = EventType.TURNING_ON_THE_DEVICE;
         logger.info(device.getNameOfDevice() + " is turned on by " + person.getName());
     }
+
+    @Override
+    public String toString() {
+        return "The device " + device.getNameOfDevice() + " is turning on by " + person.getName() + "\n";
+    }
 }

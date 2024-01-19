@@ -22,4 +22,8 @@ public class RepairingDevice extends Event {
         this.eventType = EventType.REPAIRING_DEVICE;
         logger.info(device.getNameOfDevice() + " is repairing by " + person.getName());
     }
+    @Override
+    public String toString() {
+        return "The device " + device.getNameOfDevice() + " is repairing by " + person.getName() + "\n";
+    }
 }

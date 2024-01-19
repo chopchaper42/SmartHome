@@ -7,9 +7,9 @@ Everything that happens is recorded for a report, the examples and result you ca
 ## How to execute application? 
 For IntelliJ IDEA users:
 1. Go to the tab *Run* - edit configurations 
-2. Write in the tab "Program arguments" 4 arguments: 1) house configuration file 2) event report file 3) electricity report file 4) activity report file
+2. Write in the tab "Program arguments" 4 arguments: 1) house configuration file 2) event report file 3) electricity report file 
 > Example for our my application:
-> configuration/house.json reports/EventReportFile.txt reports/ElectricityReportFile.txt reports/ActivityReportFile.txt
+> configuration/house.json reports/EventReportFile.txt reports/ElectricityReportFile.txt 
 3. Push *Ok*
 
 ## Criteria 
@@ -30,32 +30,32 @@ For IntelliJ IDEA users:
 
 **Example of structure of configuration file:**
 
-- home 
-    - daysCount 
-    - floors
-        - level 1 
-        - rooms 
-            - name 
-            - devices 
+- days 
+  - floors
+      - level 1 
+      - rooms 
+          - name 
+          - devices 
+            - device_type
+            - concrete_device
+          - name 
+          - devices 
               - device_type
-                - concrete type/name
-            - name 
-            - devices 
-                - device_type
-                    -concrete type/name
+              - concrete_device
 
 - creatures 
-    - animals 
-        - animal type
-            - name
-            - age
-            - number of floor
-            - name of room
-    - people 
-        - people type (child/adult)
-            - name 
-            - age 
-            - room
+    - animals
+        - type
+        - name
+        - age
+        - number of floor
+        - name of room
+    - people
+      - type
+      - name
+      - age
+      - number of floor
+      - name of room
 
 
 ## Pattern used 
@@ -66,9 +66,6 @@ For IntelliJ IDEA users:
 > 5) Factory method: For creating creatures (PetFactory, PeopleFactory), devices (Device factory), rooms (Room factory)
 > 6) Observer: EventObserver for events realization 
 
-## Tests
-**Are there any tests?**
-> I decided to test these particular methods because I found them challenging and important to test
 
 ## Diagrams
 > You can find my diagrams in *diagrams* folder.

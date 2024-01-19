@@ -17,11 +17,11 @@ public class ElectricityReport implements Report{
     public void generateReport(String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Floor floor : House.getInstance().getFloors()) {
-                writer.write("FLOOR # " + floor.getLevel());
+                writer.write("FLOOR # " + floor.getLevel() + "\n");
                 for (Room room : floor.getRooms()) {
-                    writer.write("ROOM: " + room.getRoomName());
+                    writer.write("ROOM: " + room.getRoomName() + "\n");
                     for (Device device : room.getDevices()) {
-                        writer.write("DEVICE: " + device.getNameOfDevice() + " spend " + device.getElectricityRecord() + "\n");
+                        writer.write("DEVICE: " + device.getNameOfDevice() + " spend " + device.getElectricityRecord().toString() + "\n");
 
                     }
                 }

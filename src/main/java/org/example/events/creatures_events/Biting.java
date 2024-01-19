@@ -19,4 +19,8 @@ public class Biting extends Event {
         logger.info(animal.getName() + " is biting " + person.getName());
     }
 
+    @Override
+    public String toString() {
+        return animal.getName() + " is biting " + person.getName();
+    }
 }

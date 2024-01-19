@@ -14,5 +14,6 @@ public abstract class Event {
     protected Event() {
         EventReport.getInstance().addEvent(this);
     }
+    public abstract String toString();
 
 }

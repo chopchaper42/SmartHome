@@ -58,13 +58,16 @@ public class EventManager {
     public void notify(Event event) {
         if(event.getEventType() == DAY) {
             List<EventObserver> eventObserverList = INSTANCE.listeners.get(DAY);
-            if(!eventObserverList.isEmpty()) {
+            if(eventObserverList != null) {
                 for(EventObserver eventObserver : eventObserverList) {
                     eventObserver.startingNewDay();
                 }
             }
         }
         List<EventObserver> eventObserverList2 = listeners.get(event.getEventType());
+        if (eventObserverList2 == null) {
+            return;
+        }
         for (EventObserver eventObserver : eventObserverList2) {
             eventObserver.update(event);
         }

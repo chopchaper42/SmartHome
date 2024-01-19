@@ -15,4 +15,9 @@ public class Sporting  extends Event {
         this.eventType = eventType.SPORTING;
         logger.info(person.getName() + " is doing sport.");
     }
+
+    @Override
+    public String toString() {
+        return person.getName() + " is doing sport.\n";
+    }
 }

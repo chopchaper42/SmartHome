@@ -21,4 +21,9 @@ public class UsingDevice extends Event {
         this.eventType = EventType.USING_DEVICE;
         logger.info(person.getName() + " is using " + device.getNameOfDevice());
     }
+
+    @Override
+    public String toString() {
+        return "The device " + device.getNameOfDevice() + " is using by " + person.getName() + "\n";
+    }
 }

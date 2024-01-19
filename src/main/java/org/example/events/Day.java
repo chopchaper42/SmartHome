@@ -18,7 +18,11 @@ public class Day extends Event {
         this.eventType = EventType.DAY;
         days++;
         numberOfDays = days;
-        EventManager.getInstance().notify();
-        logger.info("Day #1 " + numberOfDays + " started. ");
+        logger.info("Day # " + numberOfDays + " started. ");
+        EventManager.getInstance().notify(this);
+    }
+    @Override
+    public String toString() {
+        return "Day started \n";
     }
 }

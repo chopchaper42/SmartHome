@@ -1,5 +1,7 @@
 package org.example.device;
 
+import java.util.Objects;
+
 public enum ConstructionDeviceTypes {
     AUTOMATIC_DOOR(DeviceTypes.CONSTRUCTION_DEVICE),
     AUTOMATIC_WINDOW(DeviceTypes.CONSTRUCTION_DEVICE);
@@ -8,4 +10,5 @@ public enum ConstructionDeviceTypes {
     ConstructionDeviceTypes(DeviceTypes type) {
         this.type = type;
     }
+
 }

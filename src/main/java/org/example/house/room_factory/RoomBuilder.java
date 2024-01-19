@@ -17,13 +17,14 @@ import java.util.List;
 @Getter
 @Setter
 public class RoomBuilder {
-
+    private int level;
 
     private final List<Device> devices = new ArrayList<>();
     private final List<AutomaticWindow> windowList = new ArrayList<>();
     private final List<AutomaticDoor> doorList = new ArrayList<>();
     RoomFactory roomFactory = RoomFactory.getInstance();
     RoomTypes roomName;
+    private String nameOfRoom;
 
     /**
      * Add device to the room
@@ -40,7 +41,7 @@ public class RoomBuilder {
      */
     public RoomBuilder addWindows(int numberOfWindows){
         for (int i = 0; i < numberOfWindows; i++) {
-            AutomaticWindow window = new AutomaticWindow(roomFactory.createRoom(roomName));
+            AutomaticWindow window = new AutomaticWindow(roomFactory.createRoom(nameOfRoom));
             devices.add(window);
             windowList.add(window);
         }
@@ -54,7 +55,7 @@ public class RoomBuilder {
      */
     public RoomBuilder addDoors(int numberOfDoors){
         for (int i = 0; i < numberOfDoors; i++) {
-            AutomaticDoor door = new AutomaticDoor(roomFactory.createRoom(roomName));
+            AutomaticDoor door = new AutomaticDoor(roomFactory.createRoom(nameOfRoom));
             devices.add(door);
             doorList.add(door);
         }
@@ -66,7 +67,7 @@ public class RoomBuilder {
      * @return target room
      */
     public Room build() {
-        Room room = roomFactory.createRoom(roomName);
+        Room room = roomFactory.createRoom(nameOfRoom);
         room.setDevices(devices);
         for (Device device : devices) {
             device.setCurrentRoom(room);

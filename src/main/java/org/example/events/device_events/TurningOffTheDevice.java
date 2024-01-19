@@ -22,4 +22,8 @@ public class TurningOffTheDevice extends Event {
         this.eventType = EventType.TURNING_OFF_THE_DEVICE;
         logger.info(device.getNameOfDevice() + " is turned off by " + person.getName());
     }
+    @Override
+    public String toString() {
+        return "The device " + device.getNameOfDevice() + " is turning off by " + person.getName() + "\n";
+    }
 }

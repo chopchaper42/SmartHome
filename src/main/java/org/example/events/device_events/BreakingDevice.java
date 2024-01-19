@@ -28,4 +28,9 @@ public class BreakingDevice extends Event {
         EventManager.getInstance().notify(this);
         logger.info(device.getNameOfDevice() + " is broken by " + creature.getName());
     }
+
+    @Override
+    public String toString() {
+        return "The device " + device.getNameOfDevice() + " is broken by " + creature.getName() + "\n";
+    }
 }

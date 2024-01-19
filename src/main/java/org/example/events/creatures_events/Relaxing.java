@@ -15,4 +15,9 @@ public class Relaxing extends Event {
         this.eventType = eventType.RELAXING;
         logger.info(person.getName() + " is relaxing.");
     }
+
+    @Override
+    public String toString() {
+        return person.getName() + " is relaxing.\n";
+    }
 }
