@@ -15,7 +15,12 @@ public class EventReport implements Report{
     private static EventReport INSTANCE;
     private List<Event> events;
 
-    private EventReport() {}
+    private EventReport() {
+    }
+
+    public boolean addEvent(Event event){
+        return events.add(event);
+    }
 
     @Override
     public void generateReport(String filename) {
@@ -42,4 +47,6 @@ public class EventReport implements Report{
         }
         return INSTANCE;
     }
+
+
 }

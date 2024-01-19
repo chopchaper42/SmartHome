@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.creature.Creature;
 import org.example.device.Device;
+import org.example.house.confuguration.HouseConfigurationReader;
 import org.example.house.floors.Floor;
 import org.example.report.Report;
 
@@ -41,6 +42,8 @@ public class House {
             house.floors = new ArrayList<>();
             house.creatures = new ArrayList<>();
             fullCreatureStrategies();
+            HouseConfigurationReader houseConfigurationReader = new HouseConfigurationReader();
+            houseConfigurationReader.loadJson();
         }
         return INSTANCE;
     }

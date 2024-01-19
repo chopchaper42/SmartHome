@@ -1,0 +1,41 @@
+{
+  "home": {
+  },
+  "creatures": {
+    "animals": [
+      {
+        "type": "cats",
+        "name": "Fluffy",
+        "age": 2,
+        "number_of_floor": 1,
+        "name_of_room": "Kitchen"
+      }
+    ],
+    "people": [
+      {
+        "type": "adults",
+        "name": "Dad",
+        "age": 40,
+        "room": "Kitchen"
+      },
+      {
+        "type": "adults",
+        "name": "Mom",
+        "age": 35,
+        "room": "Kitchen"
+      },
+      {
+        "type": "children",
+        "name": "Pepa",
+        "age": 14,
+        "room": "LivingRoom"
+      },
+      {
+        "type": "children",
+        "name": "George",
+        "age": 9,
+        "room": "LivingRoom"
+      }
+    ]
+  }
+}

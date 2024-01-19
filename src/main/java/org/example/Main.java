@@ -19,6 +19,7 @@ public class Main {
         if (House.getInstance() != null) {
             simulation.printGreetings();
             simulation.run();
+            System.out.println("abc");
             EventReport.getInstance().generateReport(args[1]);
             ElectricityReport.getInstance().generateReport(args[2]);
             ActivityAndUsageReport.getInstance().generateReport(args[3]);
