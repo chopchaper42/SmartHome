@@ -1,58 +1,106 @@
 package org.example.device;
 
-import org.example.device.state_pattern.DeviceState;
-import org.example.house.room.Room;
+import lombok.Getter;
+import lombok.Setter;
+import org.example.SmartHouse;
+import org.example.Task;
+import org.example.TaskSource;
+import org.example.device.state.DeviceState;
+import org.example.device.state.StateBroken;
+import org.example.device.state.StateOFF;
+import org.example.device.state.StateON;
 
-public abstract class Device {
+import java.util.Random;
+import java.util.UUID;
 
-    //private final DeviceTypes type;
-    private final Room currentRoom;
+public abstract class Device implements TaskSource {
+    @Getter
+    private final double CONSUMPTION;
+    @Setter
+    protected DeviceState state;
+    @Getter
+    protected double consumedElectricity;
+    @Getter @Setter
+    private String id;
+    @Getter @Setter
+    protected boolean isAlwaysOn = false;
+    @Getter @Setter
+    protected boolean isOccupied = false;
 
-    //electricity wasting
-    private final int onElectricityWasting;
-    private final int offElectricityWasting;
-
-    private final int brokenElectricityWasting;
-    //**************************************
-
-    //State pattern
-    private DeviceState stateOfDevice;
-    //private Device currentState = new OffState(this); default state???
-    //*******************************
-
-    protected Device(Room currentRoom, int onElectricityWasting, int offElectricityWasting, int brokenElectricityWasting) {
-        this.currentRoom = currentRoom;
-        this.onElectricityWasting = onElectricityWasting;
-        this.offElectricityWasting = offElectricityWasting;
-        this.brokenElectricityWasting = brokenElectricityWasting;
+    protected Device(double consumption) {
+        this.id = UUID.randomUUID().toString();
+        this.CONSUMPTION = consumption;
+        state = new StateOFF(this);
     }
 
-    //GETTERS
+    /**
+     * Increases consumed electricity
+     * @param consumption a value to increase by
+     */
+    public void consumeElectricity(double consumption) { this.consumedElectricity += consumption; }
 
-    public int getOnElectricityWasting() {
-        return onElectricityWasting;
+    /**
+     * Consumes electricity. May 5% chance to get broken.
+     */
+    public void update() {
+        if (state instanceof StateON && new Random().nextInt(100) < 5) {
+            setState(new StateBroken(this));
+            SmartHouse.instance().assignTask(this, Task.Type.REPAIR);
+            System.out.println(getId() + " is broken. Need to repair.");
+            return;
+        }
+        state.use();
     }
 
-    public int getOffElectricityWasting() {
-        return offElectricityWasting;
+    /**
+     * Turns the device off
+     */
+    public void off() {
+        if (!isBroken())
+            state = new StateOFF(this);
     }
 
-    public int getBrokenElectricityWasting() {
-        return brokenElectricityWasting;
+    /**
+     * Turns the device on
+     */
+    public void on() {
+        if (!isBroken())
+            state = new StateON(this);
     }
 
-    //SETTERS
+    /**
+     * @return device id
+     */
+    @Override
+    public String toString() {
+        return id;
+    }
 
-    public void setStateOfDevice(DeviceState stateOfDevice) {
-        this.stateOfDevice = stateOfDevice;
-    }
-    //***********************************
+    /**
+     * Returns the documentation
+     * @return device documentation
+     */
+    public abstract String getDocumentation();
 
-    //State pattern sketches
-    public String turnOn() {
-        return "Device IS ON ( ͡° ͜ʖ ͡°)";
+    /**
+     * @return true if the device is on, false otherwise
+     */
+    public boolean isON() {
+        return state instanceof StateON;
     }
-    public String turnOff() {
-        return "Device is OFF (っ-̶●̃益●̶̃)っ";
+
+    /**
+     * @return true if the device is broken, false otherwise
+     */
+    public boolean isBroken() {
+        return state instanceof StateBroken;
     }
+
+    /**
+     * Repairs the device if is broken
+     */
+    public void repair() {
+        state.repair();
+    }
+
 }

@@ -1,15 +1,12 @@
 package org.example.house.strategy;
 
+import org.example.SmartHouse;
 import org.example.creature.Creature;
 
-import java.util.List;
-
-public class NightStrategy implements Strategy {
+public class NightStrategy implements HouseStrategy {
+    /**
+     * Nighttime strategy
+     */
     @Override
-    public void everythingIsHappeningAsISaid(List<Creature> creatures) {
-        for (Creature creature : creatures) {
-            creature.sleep();
-        }
-        System.out.println("EVERYBODY IS SLEEPING");
-    }
+    public void execute() {}
 }

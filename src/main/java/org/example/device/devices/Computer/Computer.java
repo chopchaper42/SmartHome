@@ -1,0 +1,18 @@
+package org.example.device.devices.Computer;
+
+import org.example.device.Device;
+import org.example.device.state.DeviceState;
+
+public class Computer extends Device {
+
+    /**
+     * Creates a computer
+     */
+    public Computer() {
+        super(15d);
+    }
+    @Override
+    public String getDocumentation() {
+        return "Computer documentation";
+    }
+}

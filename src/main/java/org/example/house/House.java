@@ -3,29 +3,37 @@ package org.example.house;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.example.creature.Creature;
-import org.example.house.strategy.Strategy;
-import org.example.report.Reporter;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 public class House {
-    private HouseControlSystem controlSystem;
-    private List<HouseNode> houseComposition;
-    public List<Creature> creatures;
-    private List<Floor> floors;
-    private Reporter reporter;
+    private String name;
+    private List<Floor> floors = new ArrayList<>();
 
-    private Strategy strategy;  //???
-
-    public void strategyScenario() {
-        strategy.everythingIsHappeningAsISaid(creatures);
+    /**
+     * Creates a house with a given name
+     * @param name
+     */
+    public House(String name) {
+        this.name = name;
     }
 
-    //SETTERS
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
-    } //House.setStrategy(new NightStrategy()); House.strategyScenario();
+    /**
+     * Adds the floor to the floors list
+     * @param floor the floor to add
+     */
+    public void addFloor(Floor floor) {
+        floors.add(floor);
+    }
 
+    /**
+     * Adds the collection of floors to the floors list
+     * @param floors the collection of floors to add
+     */
+    public void addAllFloors(Collection<Floor> floors) {
+        this.floors.addAll(floors);
+    }
 }
